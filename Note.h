@@ -5,6 +5,9 @@
 #ifndef ANDREAGEPPONILAB_NOTE_H
 #define ANDREAGEPPONILAB_NOTE_H
 #include <string>
+#include <utility>
+#include <iostream>
+#include <windows.h>
 using namespace std;
 class Note{
 public:
@@ -33,6 +36,8 @@ public:
     void setPriority(const string &priority) {
         Priority = priority;
     }
+
+    void Print();
 
 private:
 string Name,Description,Priority;

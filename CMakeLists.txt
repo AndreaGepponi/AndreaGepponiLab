@@ -3,4 +3,4 @@ project(AndreaGepponiLab)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(AndreaGepponiLab main.cpp Note.h)
+add_executable(AndreaGepponiLab main.cpp Note.h Note.cpp)
