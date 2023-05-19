@@ -47,3 +47,75 @@ int Date::CheckDate(const Date& Data) {
         }
     }
 }
+
+void Date::addDate(){
+    int year,month,day;
+    HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
+    bool bisestile=false;
+
+    cout<<"Insert yyyy/mm/dd:"<<endl;
+    cout<<"Year:";cin>>year;
+
+    if((year%4==0 && year%100!=0) || year%400==0)
+        bisestile=true;
+
+    cout<<"Month:";cin>>month;
+    if(0<month && month<13){
+        if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+            cout<<"Day:";cin>>day;
+            cout<<endl;
+            if(day<1 || day>31){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"ERROR|Value out of bound"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+                addDate();
+                return;
+            }
+        }
+        else if(month==4||month==6||month==9||month==11){
+            cout<<"Day:";cin>>day;
+            cout<<endl;
+            if(day<1 || day>30){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"ERROR|Value out of bound"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+                addDate();
+                return;
+            }
+        }
+        else if(bisestile){
+            cout<<"Day:";cin>>day;
+            cout<<endl;
+            if(day<1 || day>29){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"ERROR|Value out of bound"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+                addDate();
+                return;
+            }
+        }
+        else{
+            cout<<"Day:";cin>>day;
+            cout<<endl;
+            if(day<1 || day>28){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"ERROR|Value out of bound"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+                addDate();
+                return;
+            }
+        }
+
+        setYear(year);
+        setMonth(month);
+        setDay(day);
+        return;
+    }
+    else{
+        SetConsoleTextAttribute(hConsole,4);
+        cout<<"ERROR|Value out of bound"<<endl;
+        SetConsoleTextAttribute(hConsole,7);
+        addDate();
+        return;
+    }
+}

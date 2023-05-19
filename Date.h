@@ -37,6 +37,7 @@ public:
 
     int CheckDate(const Date& Data);
 
+    void addDate();
 private:
     int Year,Month,Day;
 };
