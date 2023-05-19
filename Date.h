@@ -33,6 +33,10 @@ public:
         Day = day;
     }
 
+    void show();
+
+    int CheckDate(const Date& Data);
+
 private:
     int Year,Month,Day;
 };
