@@ -8,6 +8,7 @@
 #include <utility>
 #include <iostream>
 #include <windows.h>
+#include "Date.h"
 using namespace std;
 class Note{
 public:
@@ -39,7 +40,15 @@ public:
 
     void Print();
 
+    void setDate(Date* date){
+        Date=date;
+    }
+
+    void eraseDate(){
+        Date=nullptr;
+    }
 private:
 string Name,Description,Priority;
+Date* Date=nullptr;
 };
 #endif //ANDREAGEPPONILAB_NOTE_H
