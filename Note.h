@@ -44,6 +44,10 @@ public:
         Date=date;
     }
 
+    Date *getDate() const{
+        return Date;
+    }
+
     void eraseDate(){
         Date=nullptr;
     }

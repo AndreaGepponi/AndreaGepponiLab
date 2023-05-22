@@ -1,6 +1,10 @@
 #include <iostream>
+#include "NoteList.h"
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    NoteList ToDoList;
+    ToDoList.addNote();
+    ToDoList.save();
     return 0;
 }
