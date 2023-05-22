@@ -3,6 +3,7 @@
 //
 #include "NoteList.h"
 #include <windows.h>
+#include <algorithm>
 
 void NoteList::init(){
     ifstream fText("Testo.txt",ifstream::in);
@@ -99,6 +100,7 @@ void NoteList::addNote(){
         }
     }
     NoteVector.emplace_back(Activity);
+    sort();
     cout<<"List updated."<<endl;
 }
 
@@ -182,6 +184,12 @@ void NoteList::removeNote(const std::string &NoteName) {
 void NoteList::removeAll() {
     NoteVector.clear();
     cout<<"The list is now empty."<<endl;
+}
+
+void NoteList::sort(){
+    ::sort(NoteVector.begin(), NoteVector.end(), [](const Note & NoteA, const Note & NoteB){
+        return NoteA.getName() < NoteB.getName();
+    });
 }
 
 vector <string> NoteList::split(const string& s, const string& delimiter) {

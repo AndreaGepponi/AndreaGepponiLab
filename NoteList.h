@@ -31,6 +31,8 @@ public:
 
     void removeAll();
 
+    void sort();
+
     static vector<string> split(const string& s,const string& delimiter);
 
     string readTerminal();

@@ -28,9 +28,8 @@ string compact(vector<string> InputCommand){
 int main() {
     NoteList ToDoList;
     ToDoList.printAll();
-    vector<string> TerminalInput=splitTerminal();
-    string InputString=compact(TerminalInput);
-    ToDoList.removeAll();
+    ToDoList.addNote();
+    ToDoList.addNote();
     ToDoList.printAll();
     ToDoList.save();
     return 0;
