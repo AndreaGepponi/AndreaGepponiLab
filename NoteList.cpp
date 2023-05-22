@@ -179,6 +179,11 @@ void NoteList::removeNote(const std::string &NoteName) {
     cout<<"List updated."<<endl;
 }
 
+void NoteList::removeAll() {
+    NoteVector.clear();
+    cout<<"The list is now empty."<<endl;
+}
+
 vector <string> NoteList::split(const string& s, const string& delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;

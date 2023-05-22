@@ -29,6 +29,8 @@ public:
 
     void removeNote(const string& NoteName);
 
+    void removeAll();
+
     static vector<string> split(const string& s,const string& delimiter);
 
     string readTerminal();
