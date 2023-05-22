@@ -23,6 +23,8 @@ public:
 
     void addNote();
 
+    void printAll();
+
     vector<string> split(const string& s,const string& delimiter);
 
     string readTerminal();

@@ -102,6 +102,61 @@ void NoteList::addNote(){
     cout<<"List updated."<<endl;
 }
 
+void NoteList::printAll() {
+    if(NoteVector.empty()){
+        cout<<"The list is empty."<<endl;
+    }
+    else{
+        vector<Note>::iterator index;
+        int counter=1;
+        HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
+        cout<<"[#]Name|Status|Priority"<<endl;cout<<endl;
+        for(index=NoteVector.begin();index!=NoteVector.end();index++){
+            string Name=index->getName();
+            string Value=index->getPriority();
+            cout<<"[" <<counter <<"]"<< Name << "|";
+            if(index->getDate()!=nullptr){
+                int today=index->getDate()->CheckDate(*index->getDate());
+                if(today==0){
+                    SetConsoleTextAttribute(hConsole,6);
+                    cout<<"EXPIRE TODAY";
+                    SetConsoleTextAttribute(hConsole,7);
+                    cout<<"|";
+                }
+                else if(today==2){
+                    SetConsoleTextAttribute(hConsole,5);
+                    cout<<"EXPIRED";
+                    SetConsoleTextAttribute(hConsole,7);
+                    cout<<"|";
+                }
+                else{
+                    SetConsoleTextAttribute(hConsole,3);
+                    cout<<"NOT EXPIRED";
+                    SetConsoleTextAttribute(hConsole,7);
+                    cout<<"|";
+                }
+            }
+            else{
+                SetConsoleTextAttribute(hConsole,8);
+                cout<<"No expiration";
+                SetConsoleTextAttribute(hConsole,7);
+                cout<<"|";
+            }
+            if(Value=="Low"){
+                SetConsoleTextAttribute(hConsole,1);
+                cout<< Value <<endl;
+                SetConsoleTextAttribute(hConsole,7);
+            }
+            else{
+                SetConsoleTextAttribute(hConsole,4);
+                cout<< Value <<endl;
+                SetConsoleTextAttribute(hConsole,7);
+            }
+            counter++;
+        }
+    }
+}
+
 vector <string> NoteList::split(const string& s, const string& delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
