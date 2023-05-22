@@ -28,10 +28,16 @@ string compact(vector<string> InputCommand){
 int main() {
     NoteList ToDoList;
     ToDoList.printAll();
+    cout<<"---------------"<<endl;
     vector<string>TerminalInput=splitTerminal();
     string InputString=compact(TerminalInput);
-    ToDoList.modify(InputString);
-    ToDoList.printNote(InputString);
+    ToDoList.deadLine(InputString);
+    cout<<"---------------"<<endl;
+    ToDoList.printAll();
+    cout<<"---------------"<<endl;
+    ToDoList.noDeadLine(InputString);
+    cout<<"---------------"<<endl;
+    ToDoList.printAll();
     ToDoList.save();
     return 0;
 }

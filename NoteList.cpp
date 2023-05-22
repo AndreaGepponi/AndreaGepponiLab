@@ -211,6 +211,36 @@ void NoteList::modify(const string& NoteName){
     }
 }
 
+void NoteList::deadLine(const std::string &NoteName) {
+    HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
+    vector<Note>::iterator index;
+    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+        if(NoteName==index->getName()){
+            Date* Giorno=new Date;
+            Giorno->addDate();
+            index->setDate(Giorno);
+            cout<<"Deadline added."<<endl;
+            if(int check=Giorno->CheckDate(*Giorno)==2){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"//WARNING:Deadline already expired//"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+            }
+            break;
+        }
+    }
+    if(index==NoteVector.end())
+        cout<<"Note not found."<<endl;
+}
+
+void NoteList::noDeadLine(const std::string &NoteName) {
+    for(vector<Note>::iterator index=NoteVector.begin();index!=NoteVector.end();index++){
+        if(index->getName()==NoteName){
+            index->eraseDate();
+            break;
+        }
+    }
+}
+
 bool NoteList::checkDuplicate(const std::string &NoteName) {
     vector<Note>::iterator index;
     for(index=NoteVector.begin();index!=NoteVector.end();index++){

@@ -33,6 +33,10 @@ public:
 
     void modify(const string& NoteName);
 
+    void deadLine(const string& NoteName);
+
+    void noDeadLine(const string& NoteName);
+
     bool checkDuplicate(const string& NoteName);
 
     void sort();
