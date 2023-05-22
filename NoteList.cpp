@@ -172,7 +172,7 @@ void NoteList::printNote(const string& NoteName){
     }
 }
 
-void NoteList::removeNote(const std::string &NoteName) {
+void NoteList::removeNote(const string &NoteName) {
     for(vector<Note>::iterator index=NoteVector.begin(); index != NoteVector.end() + 1; index++){
         if(index->getName() == NoteName){
             NoteVector.erase(index);
@@ -184,6 +184,22 @@ void NoteList::removeNote(const std::string &NoteName) {
 void NoteList::removeAll() {
     NoteVector.clear();
     cout<<"The list is now empty."<<endl;
+}
+
+void NoteList::modify(const string& NoteName){
+    vector<Note>::iterator index;
+    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+        if(index->getName()==NoteName){
+            cout<<"Insert new description:";
+            string des=readTerminal();
+            index->setDescription(des);
+            cout<<"The note has been modified."<<endl;
+            break;
+        }
+    }
+    if(index==NoteVector.end()){
+        cout<<"Note not found."<<endl;
+    }
 }
 
 void NoteList::sort(){
