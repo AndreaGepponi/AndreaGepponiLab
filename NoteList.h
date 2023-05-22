@@ -25,7 +25,9 @@ public:
 
     void printAll();
 
-    vector<string> split(const string& s,const string& delimiter);
+    void printNote(const string& NoteName);
+
+    static vector<string> split(const string& s,const string& delimiter);
 
     string readTerminal();
 

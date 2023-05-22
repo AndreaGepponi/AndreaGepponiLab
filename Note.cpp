@@ -19,4 +19,8 @@ void Note::Print() {
         cout<<Priority<<endl;
         SetConsoleTextAttribute(hConsole,7);
     }
+    if(getDate()!=nullptr){
+        cout<<"Expiration:";
+        getDate()->show();
+    }
 }

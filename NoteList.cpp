@@ -157,6 +157,19 @@ void NoteList::printAll() {
     }
 }
 
+void NoteList::printNote(const string& NoteName){
+    vector<Note>::iterator index;
+    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+        if(index->getName()==NoteName){
+            index->Print();
+            break;
+        }
+    }
+    if(index==NoteVector.end()){
+        cout<<"Note not found."<<endl;
+    }
+}
+
 vector <string> NoteList::split(const string& s, const string& delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
