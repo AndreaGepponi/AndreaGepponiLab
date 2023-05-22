@@ -72,6 +72,15 @@ void NoteList::addNote(){
     cout<<"Insert name:";
     Nam=readTerminal();
 
+    bool control= checkDuplicate(Nam);
+    if(control){
+        SetConsoleTextAttribute(hConsole,4);
+        cout<<"//Name already used.Use a new name.//"<<endl;
+        SetConsoleTextAttribute(hConsole,7);
+        addNote();
+        return;
+    }
+
     cout<<"Insert description:";
     Des=readTerminal();
 
@@ -200,6 +209,15 @@ void NoteList::modify(const string& NoteName){
     if(index==NoteVector.end()){
         cout<<"Note not found."<<endl;
     }
+}
+
+bool NoteList::checkDuplicate(const std::string &NoteName) {
+    vector<Note>::iterator index;
+    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+        if(index->getName()==NoteName)
+            return true;
+    }
+    return false;
 }
 
 void NoteList::sort(){

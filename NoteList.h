@@ -33,6 +33,8 @@ public:
 
     void modify(const string& NoteName);
 
+    bool checkDuplicate(const string& NoteName);
+
     void sort();
 
     static vector<string> split(const string& s,const string& delimiter);
