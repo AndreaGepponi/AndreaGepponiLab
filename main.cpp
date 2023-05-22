@@ -30,7 +30,7 @@ int main() {
     ToDoList.printAll();
     vector<string> TerminalInput=splitTerminal();
     string InputString=compact(TerminalInput);
-    ToDoList.printNote(InputString);
+    ToDoList.removeNote(InputString);
     ToDoList.save();
     return 0;
 }

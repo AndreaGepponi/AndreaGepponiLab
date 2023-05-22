@@ -170,6 +170,15 @@ void NoteList::printNote(const string& NoteName){
     }
 }
 
+void NoteList::removeNote(const std::string &NoteName) {
+    for(vector<Note>::iterator index=NoteVector.begin(); index != NoteVector.end() + 1; index++){
+        if(index->getName() == NoteName){
+            NoteVector.erase(index);
+        }
+    }
+    cout<<"List updated."<<endl;
+}
+
 vector <string> NoteList::split(const string& s, const string& delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
