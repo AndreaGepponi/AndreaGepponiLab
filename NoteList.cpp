@@ -84,14 +84,13 @@ void NoteList::addNote(){
     cout<<"Insert description:";
     Des=readTerminal();
 
-    cout<<"Insert priority(High/Low):";
+    cout<<"Is Important?";
     cin>>Value;
-    if(Value!="High"&& Value!="Low"){
-        SetConsoleTextAttribute(hConsole,4);
-        cout<<"//Unknown priority.Need to insert from the beginning.//"<<endl;
-        SetConsoleTextAttribute(hConsole,7);
-        addNote();
-        return;
+    if(Value=="yes"||Value=="Yes"||Value=="y"){
+       Value="High";
+    }
+    else{
+        Value="Low";
     }
     Note Activity(Nam,Des,Value);
     cout<<"Add expiration date?";

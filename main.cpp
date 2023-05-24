@@ -43,7 +43,6 @@ void commands(){
     cout<<"Type help to show command list."<<endl;
 }
 
-
 void Interaction(NoteList ToDoList){
     HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole,7);
