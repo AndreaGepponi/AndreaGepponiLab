@@ -33,7 +33,7 @@ void separate(){
 void commands(){
     cout<<"Type add to add note."<<endl;
     cout<<"Type expire/[NoteName] to add or modify expiration date."<<endl;
-    cout<<"Type NoExpire/[NoteName] to remove expiration date."<<endl;
+    cout<<"Type noexpire/[NoteName] to remove expiration date."<<endl;
     cout<<"Type remove/[NoteName] to remove note."<<endl;
     cout<<"Type print/[NoteName] to print note."<<endl;
     cout<<"Type modify/[NoteName] to modify a note's description."<<endl;
@@ -49,8 +49,8 @@ void Interaction(NoteList ToDoList){
 
     vector<string>TerminalInput;
     TerminalInput=splitTerminal();
-
     separate();
+
     if(TerminalInput[0]=="expire"){
         string InputString=compact(TerminalInput);
         ToDoList.deadLine(InputString);

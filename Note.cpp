@@ -4,7 +4,7 @@
 
 #include "Note.h"
 
-void Note::Print() {
+void Note::Print() const{
     HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole,7);
 

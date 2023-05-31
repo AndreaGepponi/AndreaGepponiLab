@@ -12,7 +12,7 @@
 using namespace std;
 class Note{
 public:
-    Note(string N,string D,string P):Name(move(N)),Description(move(D)),Priority(move(P)){};
+    Note(string N,string D,string P):Name(std::move(N)),Description(std::move(D)),Priority(std::move(P)){};
 
     const string &getName() const {
         return Name;
@@ -26,7 +26,7 @@ public:
         return Description;
     }
 
-    void setDescription(const string &description) {
+    void setDescription(const string &description){
         Description = description;
     }
 
@@ -38,7 +38,7 @@ public:
         Priority = priority;
     }
 
-    void Print();
+    void Print()const;
 
     void setDate(Date* date){
         Date=date;

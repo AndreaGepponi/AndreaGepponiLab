@@ -7,7 +7,7 @@
 using namespace std;
 
 void Date::show() {
-    cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear();
+    cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
 }
 
 int Date::CheckDate(const Date& Data) {
@@ -118,4 +118,68 @@ void Date::addDate(){
         addDate();
         return;
     }
+}
+
+void Date::setMonth(int month){
+    if(month<1||month>12){
+        cout<<"Value out of bound.Insert value between 1 and 12."<<endl;
+        int newmonth;
+        cin>>newmonth;
+        setMonth(newmonth);
+        return;
+    }
+    else {
+        Month = month;
+    }
+}
+
+void Date::setDay(int day){
+        int year=getYear();
+        int month=getMonth();
+        int newday;
+        bool bisestile=false;
+        if((year%4==0 && year%100!=0) || year%400==0)
+            bisestile=true;
+
+        if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+
+            if(day<1 || day>31){
+                cout<<"ERROR|Value out of bound.Insert a value between 1 and 31."<<endl;
+                cin>>newday;
+                setDay(newday);
+                return;
+            }
+            else
+                Day=day;
+        }
+        else if(month==4||month==6||month==9||month==11){
+            if(day<1 || day>30){
+                cout<<"ERROR|Value out of bound.Insert a value between 1 and 30."<<endl;
+                cin>>newday;
+                setDay(newday);
+                return;
+            }
+            else
+                Day=day;
+        }
+        else if(bisestile){
+            if(day<1 || day>29){
+                cout<<"ERROR|Value out of bound.Insert a value between 1 and 29."<<endl;
+                cin>>newday;
+                setDay(newday);
+                return;
+            }
+            else
+                Day=day;
+        }
+        else{
+            if(day<1 || day>28){
+                cout<<"ERROR|Value out of bound.Insert a value between 1 and 28."<<endl;
+                cin>>newday;
+                setDay(newday);
+                return;
+            }
+            else
+                Day=day;
+        }
 }

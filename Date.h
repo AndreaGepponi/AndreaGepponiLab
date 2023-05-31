@@ -5,6 +5,8 @@
 #ifndef ANDREAGEPPONILAB_DATE_H
 #define ANDREAGEPPONILAB_DATE_H
 #include <string>
+#include <iostream>
+using namespace std;
 class Date{
 public:
     Date()=default;
@@ -21,17 +23,13 @@ public:
         return Month;
     }
 
-    void setMonth(int month) {
-        Month = month;
-    }
+    void setMonth(int month);
 
     int getDay() const {
         return Day;
     }
 
-    void setDay(int day) {
-        Day = day;
-    }
+    void setDay(int day);
 
     void show();
 

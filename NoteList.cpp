@@ -45,22 +45,21 @@ void NoteList::init(){
     }
 }  //da file txt a vector
 
-void NoteList::save(){
+void NoteList::save()const{
     ofstream fText("Testo.txt");
-    vector<Note>::iterator index;
-    for(index=NoteVector.begin();index!=NoteVector.end();index++){
-        if(index->getDate() != nullptr){
-            fText << index->getName() <<"/";
-            fText << index->getDescription() <<"/";
-            fText << index->getPriority() <<"/";
-            fText << index->getDate()->getDay() <<"/";
-            fText << index->getDate()->getMonth() <<"/";
-            fText << index->getDate()->getYear() <<";"<<endl;
+    for(auto & index : NoteVector){
+        if(index.getDate() != nullptr){
+            fText << index.getName() <<"/";
+            fText << index.getDescription() <<"/";
+            fText << index.getPriority() <<"/";
+            fText << index.getDate()->getDay() <<"/";
+            fText << index.getDate()->getMonth() <<"/";
+            fText << index.getDate()->getYear() <<";"<<endl;
         }
         else{
-            fText << index->getName() <<"/";
-            fText << index->getDescription() <<"/";
-            fText << index->getPriority() <<";"<<endl;
+            fText << index.getName() <<"/";
+            fText << index.getDescription() <<"/";
+            fText << index.getPriority() <<";"<<endl;
         }
     }
     fText.close();
@@ -112,21 +111,20 @@ void NoteList::addNote(){
     cout<<"List updated."<<endl;
 }
 
-void NoteList::printAll() {
+void NoteList::printAll()const{
     if(NoteVector.empty()){
         cout<<"The list is empty."<<endl;
     }
     else{
-        vector<Note>::iterator index;
         int counter=1;
         HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
         cout<<"[#]Name|Status|Priority"<<endl;cout<<endl;
-        for(index=NoteVector.begin();index!=NoteVector.end();index++){
-            string Name=index->getName();
-            string Value=index->getPriority();
+        for(auto & index : NoteVector){
+            const string& Name=index.getName();
+            const string& Value=index.getPriority();
             cout<<"[" <<counter <<"]"<< Name << "|";
-            if(index->getDate()!=nullptr){
-                int today=index->getDate()->CheckDate(*index->getDate());
+            if(index.getDate()!=nullptr){
+                int today=index.getDate()->CheckDate(*index.getDate());
                 if(today==0){
                     SetConsoleTextAttribute(hConsole,6);
                     cout<<"EXPIRE TODAY";
@@ -167,16 +165,15 @@ void NoteList::printAll() {
     }
 }
 
-void NoteList::printNote(const string& NoteName){
-    vector<Note>::iterator index;
-    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+void NoteList::printNote(const string& NoteName)const{
+    for(auto index=NoteVector.begin();index!=NoteVector.end()+1;index++){
         if(index->getName()==NoteName){
             index->Print();
             break;
         }
-    }
-    if(index==NoteVector.end()){
-        cout<<"Note not found."<<endl;
+        if(index==NoteVector.end()){
+            cout<<"Note not found."<<endl;
+        }
     }
 }
 
@@ -195,8 +192,7 @@ void NoteList::removeAll() {
 }
 
 void NoteList::modify(const string& NoteName){
-    vector<Note>::iterator index;
-    for(index=NoteVector.begin();index!=NoteVector.end();index++){
+    for(auto index=NoteVector.begin();index!=NoteVector.end()+1;index++){
         if(index->getName()==NoteName){
             cout<<"Insert new description:";
             string des=readTerminal();
@@ -204,13 +200,13 @@ void NoteList::modify(const string& NoteName){
             cout<<"The note has been modified."<<endl;
             break;
         }
-    }
-    if(index==NoteVector.end()){
-        cout<<"Note not found."<<endl;
+        if(index==NoteVector.end()){
+            cout<<"Note not found."<<endl;
+        }
     }
 }
 
-void NoteList::deadLine(const std::string &NoteName) {
+void NoteList::deadLine(const string& NoteName) {
     HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
     vector<Note>::iterator index;
     for(index=NoteVector.begin();index!=NoteVector.end();index++){
@@ -231,19 +227,18 @@ void NoteList::deadLine(const std::string &NoteName) {
         cout<<"Note not found."<<endl;
 }
 
-void NoteList::noDeadLine(const std::string &NoteName) {
-    for(vector<Note>::iterator index=NoteVector.begin();index!=NoteVector.end();index++){
-        if(index->getName()==NoteName){
-            index->eraseDate();
+void NoteList::noDeadLine(const string &NoteName) {
+    for(auto & index : NoteVector){
+        if(index.getName()==NoteName){
+            index.eraseDate();
             break;
         }
     }
 }
 
-bool NoteList::checkDuplicate(const std::string &NoteName) {
-    vector<Note>::iterator index;
-    for(index=NoteVector.begin();index!=NoteVector.end();index++){
-        if(index->getName()==NoteName)
+bool NoteList::checkDuplicate(const string &NoteName) const{
+    for(auto & index : NoteVector){
+        if(index.getName()==NoteName)
             return true;
     }
     return false;
@@ -255,7 +250,7 @@ void NoteList::sort(){
     });
 }
 
-vector <string> NoteList::split(const string& s, const string& delimiter) {
+vector <string> NoteList::split(const string& s, const string& delimiter){
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
     vector<string> res;
@@ -270,7 +265,7 @@ vector <string> NoteList::split(const string& s, const string& delimiter) {
     return res;
 }
 
-string NoteList::readTerminal(){
+string NoteList::readTerminal()const{
     vector<string> Trasfer;
     string input,support,output,del=" ";
 

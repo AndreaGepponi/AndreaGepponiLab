@@ -19,13 +19,13 @@ public:
 
     void init();
 
-    void save();
+    void save()const;
 
     void addNote();
 
-    void printAll();
+    void printAll ()const;
 
-    void printNote(const string& NoteName);
+    void printNote(const string& NoteName)const;
 
     void removeNote(const string& NoteName);
 
@@ -37,18 +37,18 @@ public:
 
     void noDeadLine(const string& NoteName);
 
-    bool checkDuplicate(const string& NoteName);
+    bool checkDuplicate(const string& NoteName)const;
 
     void sort();
 
     static vector<string> split(const string& s,const string& delimiter);
 
-    string readTerminal();
+    string readTerminal()const;
 
-    vector<Note> &getNoteVector(){
+    vector<Note> &getNoteVector() {
         return NoteVector;
     }
 private:
-vector<Note> NoteVector;
+    vector<Note> NoteVector;
 };
 #endif //ANDREAGEPPONILAB_NOTELIST_H
