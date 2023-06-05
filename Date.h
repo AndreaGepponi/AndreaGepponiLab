@@ -31,7 +31,7 @@ public:
 
     void setDay(int day);
 
-    void show();
+    void show() const;
 
     int CheckDate(const Date& Data);
 

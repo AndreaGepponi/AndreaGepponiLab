@@ -6,7 +6,7 @@
 #include <windows.h>
 using namespace std;
 
-void Date::show() {
+void Date::show() const {
     cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
 }
 

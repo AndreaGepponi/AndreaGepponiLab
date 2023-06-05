@@ -18,10 +18,6 @@ public:
         return Name;
     }
 
-    void setName(const string &name) {
-        Name = name;
-    }
-
     const string &getDescription() const {
         return Description;
     }
@@ -32,10 +28,6 @@ public:
 
     const string &getPriority() const {
         return Priority;
-    }
-
-    void setPriority(const string &priority) {
-        Priority = priority;
     }
 
     void Print()const;

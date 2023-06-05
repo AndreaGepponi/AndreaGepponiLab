@@ -178,7 +178,7 @@ void NoteList::printNote(const string& NoteName)const{
 }
 
 void NoteList::removeNote(const string &NoteName) {
-    for(vector<Note>::iterator index=NoteVector.begin(); index != NoteVector.end() + 1; index++){
+    for(auto index=NoteVector.begin(); index != NoteVector.end() + 1; index++){
         if(index->getName() == NoteName){
             NoteVector.erase(index);
         }
@@ -274,8 +274,8 @@ string NoteList::readTerminal()const{
     getline(cin,input);
     support+=input;
     Trasfer=split(support,del);
-    for(vector<string>::iterator index=Trasfer.begin();index!=Trasfer.end();index++){
-        output+=*index;
+    for(auto & index : Trasfer){
+        output+=index;
         output.push_back(' ');
     }
     output.pop_back();
