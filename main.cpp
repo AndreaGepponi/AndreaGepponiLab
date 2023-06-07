@@ -5,9 +5,27 @@
 #include <windows.h>
 using namespace std;
 
+string readTerminal(){
+    vector<string> Trasfer;
+    string input,support,output,del=" ";
+
+    cin>>input;cout<<endl;
+    support=input;
+    getline(cin,input);
+    support+=input;
+    Trasfer=NoteList::split(support,del);
+    for(auto & index : Trasfer){
+        output+=index;
+        output.push_back(' ');
+    }
+    output.pop_back();
+    return output;
+}
+
 vector<string> splitTerminal(){
     vector<string> Trasfer;
     string in,support,del="/";
+
     cin>>in;cout<<endl;
     support=in;
     getline(cin,in);
@@ -38,6 +56,8 @@ void commands(){
     cout<<"Type print/[NoteName] to print note."<<endl;
     cout<<"Type modify/[NoteName] to modify a note's description."<<endl;
     cout<<"Type show to show all notes names and priority."<<endl;
+    cout<<"Type important to show all important notes."<<endl;
+    cout<<"Type expired to show all epired notes."<<endl;
     cout<<"Type cancel to remove all notes."<<endl;
     cout<<"Type quit to quit."<<endl;
     cout<<"Type help to show command list."<<endl;
@@ -51,24 +71,96 @@ void Interaction(NoteList ToDoList){
     TerminalInput=splitTerminal();
     separate();
 
-    if(TerminalInput[0]=="expire"){
-        string InputString=compact(TerminalInput);
-        ToDoList.deadLine(InputString);
+    if(TerminalInput[0]=="expire") {
+        string InputString = compact(TerminalInput);
+        if(!ToDoList.findNote(InputString)){
+            cout<<"Note not existing."<<endl;
+            separate();
+            Interaction(ToDoList);
+            return;
+        }
+        int year, month, day;
+        cout << "Insert year:";
+        cin >> year;
+        cout << "Insert month:";
+        cin >> month;
+        cout << "Insert day:";
+        cin >> day;
+        Date *Giorno = new Date;
+        Giorno->setDay(day);
+        Giorno->setMonth(month);
+        Giorno->setYear(year);
+        while (Giorno->CheckDate() == 2 || !Giorno->legalDate(year,month,day)) {
+            SetConsoleTextAttribute(hConsole, 4);
+            cout << "//WARNING:Deadline not valid.Insert a legal date.//" << endl;
+            SetConsoleTextAttribute(hConsole, 7);
+            cout << "Insert year:";
+            cin >> year;
+            cout << "Insert month:";
+            cin >> month;
+            cout << "insert day:";
+            cin >> day;
+            Giorno->setDay(day);
+            Giorno->setMonth(month);
+            Giorno->setYear(year);
+           }
+        ToDoList.deadLine(InputString,Giorno);
         separate();
         ToDoList.printAll();
         separate();
         Interaction(ToDoList);
     }
-
     else if(TerminalInput[0]=="noexpire"){
         string InputString=compact(TerminalInput);
+        if(!ToDoList.findNote(InputString)){
+            cout<<"Note not existing."<<endl;
+            separate();
+            Interaction(ToDoList);
+            return;
+        }
         ToDoList.noDeadLine(InputString);
         separate();
         Interaction(ToDoList);
     }
 
     else if(TerminalInput[0]=="add"){
-        ToDoList.addNote();
+        string NoteName,NoteDescription,NoteImportant,NoteDate;
+        int year,month,day;
+        cout<<"Insert Note name:";
+        NoteName=readTerminal();
+        while(ToDoList.checkDuplicate(NoteName)){
+            SetConsoleTextAttribute(hConsole,4);
+            cout<<"//Name already used.Use a new name.//"<<endl;
+            SetConsoleTextAttribute(hConsole,7);
+            NoteName=readTerminal();
+        }
+        cout<<"Insert Note description:";
+        NoteDescription=readTerminal();
+        cout<<"Is important?";
+        NoteImportant=readTerminal();
+        cout<<"Add expire date?";
+        NoteDate=readTerminal();
+        if(NoteDate=="yes" || NoteDate=="Yes" || NoteDate=="y"){
+            cout<<"Insert year:";cin>>year;
+            cout<<"Insert month:";cin>>month;
+            cout<<"insert day:";cin>>day;
+            Date* Giorno=new Date;
+            Giorno->setDay(day);
+            Giorno->setMonth(month);
+            Giorno->setYear(year);
+            while(Giorno->CheckDate()==2 ||!Giorno->legalDate(year,month,day)){
+                SetConsoleTextAttribute(hConsole,4);
+                cout<<"//WARNING:Deadline already expired.Insert a legal date.//"<<endl;
+                SetConsoleTextAttribute(hConsole,7);
+                cout<<"Insert year:";cin>>year;
+                cout<<"Insert month:";cin>>month;
+                cout<<"insert day:";cin>>day;
+                Giorno->setDay(day);
+                Giorno->setMonth(month);
+                Giorno->setYear(year);
+            }
+        }
+        ToDoList.addNote(NoteName,NoteDescription,NoteImportant,NoteDate,day,month,year);
         separate();
         ToDoList.printAll();
         separate();
@@ -77,6 +169,12 @@ void Interaction(NoteList ToDoList){
 
     else if(TerminalInput[0]=="remove"){
         string InputString=compact(TerminalInput);
+        if(!ToDoList.findNote(InputString)){
+            cout<<"Note not existing."<<endl;
+            separate();
+            Interaction(ToDoList);
+            return;
+        }
         ToDoList.removeNote(InputString);
         separate();
         ToDoList.printAll();
@@ -86,6 +184,12 @@ void Interaction(NoteList ToDoList){
 
     else if(TerminalInput[0]=="print"){
         string InputString=compact(TerminalInput);
+        if(!ToDoList.findNote(InputString)){
+            cout<<"Note not existing."<<endl;
+            separate();
+            Interaction(ToDoList);
+            return;
+        }
         ToDoList.printNote(InputString);
         separate();
         Interaction(ToDoList);
@@ -105,7 +209,15 @@ void Interaction(NoteList ToDoList){
 
     else if(TerminalInput[0]=="modify"){
         string InputString= compact(TerminalInput);
-        ToDoList.modify(InputString);
+        if(!ToDoList.findNote(InputString)){
+            cout<<"Note not existing."<<endl;
+            separate();
+            Interaction(ToDoList);
+            return;
+        }
+        cout<<"Insert new description:";
+        string newDes=readTerminal();
+        ToDoList.modify(InputString,newDes);
         separate();
         Interaction(ToDoList);
     }
@@ -114,6 +226,18 @@ void Interaction(NoteList ToDoList){
         SetConsoleTextAttribute(hConsole,2);
         separate();
         commands();
+        separate();
+        Interaction(ToDoList);
+    }
+
+    else if(TerminalInput[0]=="important"){
+        ToDoList.printImportant();
+        separate();
+        Interaction(ToDoList);
+    }
+
+    else if(TerminalInput[0]=="expired"){
+        ToDoList.printExpired();
         separate();
         Interaction(ToDoList);
     }

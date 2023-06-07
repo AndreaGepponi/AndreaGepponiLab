@@ -15,26 +15,28 @@ public:
         return Year;
     }
 
-    void setYear(int year);
+    int setYear(int year);
 
     int getMonth() const {
         return Month;
     }
 
-    void setMonth(int month);
+    int setMonth(int month);
 
     int getDay() const {
         return Day;
     }
 
-    void setDay(int day);
+    int setDay(int day);
 
     void show() const;
 
     int CheckDate();
 
-    void addDate();
+    bool addDate(int year, int month, int day);
+
+    bool legalDate(int year,int month,int day);
 private:
-    int Year,Month,Day;
+    int Year=0,Month=1,Day=1;
 };
 #endif //ANDREAGEPPONILAB_DATE_H

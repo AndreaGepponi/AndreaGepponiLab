@@ -13,29 +13,30 @@ using namespace std;
 
 class NoteList{
 public:
-    explicit NoteList(){
-        init();
-    }
-
-    void init();
+    explicit NoteList();
 
     void save()const;
 
-    void addNote();
+    int
+    addNote(const string & NameString, const string & DesString, const string & Important, const string & needDate, int day, int month, int year);
 
     void printAll ()const;
 
-    void printNote(const string & NoteName)const;
+    void printImportant()const;
 
-    void removeNote(const string & NoteName);
+    void printExpired()const;
+
+    int printNote(const string & NoteName)const;
+
+    int removeNote(const string & NoteName);
 
     void removeAll();
 
-    void modify(const string & NoteName);
+    int modify(const string & NoteName, const string & NoteDescription);
 
-    void deadLine(const string & NoteName);
+    bool deadLine(const string & NoteName, Date*Giorno);
 
-    void noDeadLine(const string & NoteName);
+    int noDeadLine(const string & NoteName);
 
     bool checkDuplicate(const string & NoteName)const;
 
@@ -43,7 +44,7 @@ public:
 
     static vector<string> split(const string & s,const string & delimiter);
 
-    string readTerminal()const;
+    bool findNote(const string & NoteName)const;
 
     vector<Note> & getNoteVector() {
         return NoteVector;

@@ -3,12 +3,12 @@
 //
 #include "Date.h"
 #include <iostream>
-#include <windows.h>
+#include <sstream>
 using namespace std;
 
 void Date::show() const {
     cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
-}
+} //cambiare
 
 int Date::CheckDate() {
     time_t my_time=time(nullptr);
@@ -49,152 +49,82 @@ int Date::CheckDate() {
     }
 }
 
-void Date::addDate(){
-    int year,month,day;
-    HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
-    bool bisestile=false;
-
-    cout<<"Insert yyyy/mm/dd:"<<endl;
-    cout<<"Year:";cin>>year;
-
-    if((year%4==0 && year%100!=0) || year%400==0)
-        bisestile=true;
-
-    cout<<"Month:";cin>>month;
-    if(0<month && month<13){
-        if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
-            cout<<"Day:";cin>>day;
-            cout<<endl;
-            if(day<1 || day>31){
-                SetConsoleTextAttribute(hConsole,4);
-                cout<<"ERROR|Value out of bound"<<endl;
-                SetConsoleTextAttribute(hConsole,7);
-                addDate();
-                return;
-            }
-        }
-        else if(month==4||month==6||month==9||month==11){
-            cout<<"Day:";cin>>day;
-            cout<<endl;
-            if(day<1 || day>30){
-                SetConsoleTextAttribute(hConsole,4);
-                cout<<"ERROR|Value out of bound"<<endl;
-                SetConsoleTextAttribute(hConsole,7);
-                addDate();
-                return;
-            }
-        }
-        else if(bisestile){
-            cout<<"Day:";cin>>day;
-            cout<<endl;
-            if(day<1 || day>29){
-                SetConsoleTextAttribute(hConsole,4);
-                cout<<"ERROR|Value out of bound"<<endl;
-                SetConsoleTextAttribute(hConsole,7);
-                addDate();
-                return;
-            }
-        }
-        else{
-            cout<<"Day:";cin>>day;
-            cout<<endl;
-            if(day<1 || day>28){
-                SetConsoleTextAttribute(hConsole,4);
-                cout<<"ERROR|Value out of bound"<<endl;
-                SetConsoleTextAttribute(hConsole,7);
-                addDate();
-                return;
-            }
-        }
-
+bool Date::addDate(int year, int month, int day){
+    if(legalDate(year,month,day)){
         setYear(year);
         setMonth(month);
         setDay(day);
-        return;
+        return true;
     }
-    else{
-        SetConsoleTextAttribute(hConsole,4);
-        cout<<"ERROR|Value out of bound"<<endl;
-        SetConsoleTextAttribute(hConsole,7);
-        addDate();
-        return;
-    }
+    else
+        return false;
 }
 
-void Date::setYear(int year){
+int Date::setYear(int year){
+
     int m=getMonth();
     int d=getDay();
-    if(((year%4!=0 || year%100==0) && year%400!=0)&& m==2 && d==29){
-        cout<<"Incorrect year value.Insert a new one."<<endl;
-        int y;
-        cin>>y;
-        setYear(y);
-    }
-    else{
+    if(legalDate(year,m,d)){
         Year=year;
+        return 0;
     }
+    else
+        return 1;
 }
 
-void Date::setMonth(int month){
-    if(month<1||month>12){
-        cout<<"Value out of bound.Insert value between 1 and 12."<<endl;
-        int newmonth;
-        cin>>newmonth;
-        setMonth(newmonth);
-        return;
+int Date::setMonth(int month){
+
+    int y=getYear();
+    int d=getDay();
+    if(legalDate(y,month,d)){
+        Month=month;
+        return 0;
     }
-    else {
-        Month = month;
-    }
+    else
+        return 1;
 }
 
-void Date::setDay(int day){
-        int year=getYear();
-        int month=getMonth();
-        int newday;
-        bool bisestile=false;
-        if((year%4==0 && year%100!=0) || year%400==0)
-            bisestile=true;
+int Date::setDay(int day){
 
+        int y=getYear();
+        int m=getMonth();
+        if(legalDate(y,m,day)){
+            Day=day;
+            return 0;
+        }
+        else
+            return 1;
+}
+
+bool Date::legalDate(int year,int month,int day) {
+    bool bisestile=false;
+    if((year%4==0 && year%100!=0) || year%400==0)
+        bisestile=true;
+
+    if(0<month && month<13){
         if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
-
             if(day<1 || day>31){
-                cout<<"ERROR|Value out of bound.Insert a value between 1 and 31."<<endl;
-                cin>>newday;
-                setDay(newday);
-                return;
+                return false;
             }
-            else
-                Day=day;
         }
         else if(month==4||month==6||month==9||month==11){
             if(day<1 || day>30){
-                cout<<"ERROR|Value out of bound.Insert a value between 1 and 30."<<endl;
-                cin>>newday;
-                setDay(newday);
-                return;
+                return false;
             }
-            else
-                Day=day;
         }
         else if(bisestile){
             if(day<1 || day>29){
-                cout<<"ERROR|Value out of bound.Insert a value between 1 and 29."<<endl;
-                cin>>newday;
-                setDay(newday);
-                return;
+                return false;
             }
-            else
-                Day=day;
         }
         else{
             if(day<1 || day>28){
-                cout<<"ERROR|Value out of bound.Insert a value between 1 and 28."<<endl;
-                cin>>newday;
-                setDay(newday);
-                return;
+                return false;
             }
-            else
-                Day=day;
         }
+        return true;
+    }
+    else{
+        return false;
+    }
 }
