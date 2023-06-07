@@ -138,6 +138,7 @@ void Interaction(NoteList ToDoList){
         NoteDescription=readTerminal();
         cout<<"Is important?";
         NoteImportant=readTerminal();
+        ToDoList.addNote(NoteName,NoteDescription,NoteImportant);
         cout<<"Add expire date?";
         NoteDate=readTerminal();
         if(NoteDate=="yes" || NoteDate=="Yes" || NoteDate=="y"){
@@ -159,8 +160,8 @@ void Interaction(NoteList ToDoList){
                 Giorno->setMonth(month);
                 Giorno->setYear(year);
             }
+            ToDoList.deadLine(NoteName,Giorno);
         }
-        ToDoList.addNote(NoteName,NoteDescription,NoteImportant,NoteDate,day,month,year);
         separate();
         ToDoList.printAll();
         separate();

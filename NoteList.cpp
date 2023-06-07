@@ -65,29 +65,19 @@ void NoteList::save()const{
     fText.close();
 }
 
-int NoteList::addNote(const string & NameString, const string & DesString, const string & Important, const string & needDate, int day, int month, int year){
+void NoteList::addNote(const string & NameString, const string & DesString, const string & Important){
 
     string Value;
-    if(Important=="yes"||Important=="Yes"||Important=="y"){
+    if(Important=="yes"||Important=="Yes"||Important=="y")
        Value="High";
-    }
-    else{
+
+    else
         Value="Low";
-    }
+
     Note Activity(NameString,DesString,Value);
 
     NoteVector.emplace_back(Activity);
     sort();
-
-    if(needDate=="yes" || needDate=="Yes" || needDate=="y"){
-        Date* Giorno=new Date;
-        Giorno->addDate(year,month,day);
-        if(!Giorno->legalDate(year,month,day))
-            return 1;
-        deadLine(NameString,Giorno);
-        return 2;
-    }
-    return 0;
 }
 
 void NoteList::printAll()const{
@@ -189,7 +179,6 @@ int NoteList::removeNote(const string & NoteName) {
                 NoteVector.erase(index);
             }
         }
-        cout << "List updated." << endl;
         return 0;
     }
     else
@@ -198,7 +187,6 @@ int NoteList::removeNote(const string & NoteName) {
 
 void NoteList::removeAll() {
     NoteVector.clear();
-    cout<<"The list is now empty."<<endl;
 }
 
 int NoteList::modify(const string & NoteName, const string & NoteDescription){
@@ -206,7 +194,6 @@ int NoteList::modify(const string & NoteName, const string & NoteDescription){
         for (auto index = NoteVector.begin(); index != NoteVector.end() + 1; index++) {
             if (index->getName() == NoteName) {
                 index->setDescription(NoteDescription);
-                cout << "The note has been modified." << endl;
                 return 0;
             }
         }
@@ -221,7 +208,6 @@ bool NoteList::deadLine(const string & NoteName, Date*Giorno) {
     for (index = NoteVector.begin(); index != NoteVector.end(); index++) {
         if (NoteName == index->getName()) {
             index->setDate(Giorno);
-            cout << "Deadline added." << endl;
             return true;
         }
     }
@@ -235,7 +221,6 @@ int NoteList::noDeadLine(const string & NoteName) {
         for (auto &index: NoteVector) {
             if (index.getName() == NoteName) {
                 index.eraseDate();
-                cout<<"Deadline removed."<<endl;
                 return 0;
             }
         }

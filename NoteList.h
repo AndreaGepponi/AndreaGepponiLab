@@ -17,8 +17,7 @@ public:
 
     void save()const;
 
-    int
-    addNote(const string & NameString, const string & DesString, const string & Important, const string & needDate, int day, int month, int year);
+    void addNote(const string & NameString, const string & DesString, const string & Important);
 
     void printAll ()const;
 
