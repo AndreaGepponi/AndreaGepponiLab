@@ -100,7 +100,7 @@ void NoteList::addNote(){
         Giorno->addDate();
         Activity.setDate(Giorno);
         cout<<"Deadline added."<<endl;
-        if(Giorno->CheckDate(*Giorno)==2){
+        if(Giorno->CheckDate()==2){
             SetConsoleTextAttribute(hConsole,4);
             cout<<"//WARNING:Deadline already expired//"<<endl;
             SetConsoleTextAttribute(hConsole,7);
@@ -124,7 +124,7 @@ void NoteList::printAll()const{
             const string& Value=index.getPriority();
             cout<<"[" <<counter <<"]"<< Name << "|";
             if(index.getDate()!=nullptr){
-                int today=index.getDate()->CheckDate(*index.getDate());
+                int today=index.getDate()->CheckDate();
                 if(today==0){
                     SetConsoleTextAttribute(hConsole,6);
                     cout<<"EXPIRE TODAY";
@@ -215,7 +215,7 @@ void NoteList::deadLine(const string & NoteName) {
             Giorno->addDate();
             index->setDate(Giorno);
             cout<<"Deadline added."<<endl;
-            if(Giorno->CheckDate(*Giorno)==2){
+            if(Giorno->CheckDate()==2){
                 SetConsoleTextAttribute(hConsole,4);
                 cout<<"//WARNING:Deadline already expired//"<<endl;
                 SetConsoleTextAttribute(hConsole,7);

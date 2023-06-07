@@ -10,35 +10,36 @@ void Date::show() const {
     cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
 }
 
-int Date::CheckDate(const Date & Data) {
+int Date::CheckDate() {
     time_t my_time=time(nullptr);
     struct tm* local=localtime(&my_time);
 
+    int Dyear=getYear(),Dmonth=getMonth(),Dday=getDay();
     int day=local->tm_mday;
     int month=local->tm_mon+1;
     int year=local->tm_year+1900;
 
-    if(Data.getYear()==year && Data.getMonth()==month && Data.getDay()==day){
+    if(Dyear==year && Dmonth==month && Dday==day){
         return 0;
     }
 
-    if(Data.getYear() > year){
+    if(Dyear > year){
         return 1;
     }
 
-    if(Data.getYear() < year){
+    if(Dyear < year){
         return 2;
     }
 
     else{
-        if(Data.getMonth() > month){
+        if(Dmonth > month){
             return 1;
         }
-        if(Data.getMonth() < month){
+        if(Dmonth < month){
             return 2;
         }
         else{
-            if(Data.getDay() >= day){
+            if(Dday >= day){
                 return 1;
             }
             else{
