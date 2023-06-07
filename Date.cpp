@@ -120,6 +120,20 @@ void Date::addDate(){
     }
 }
 
+void Date::setYear(int year){
+    int m=getMonth();
+    int d=getDay();
+    if(((year%4!=0 || year%100==0) && year%400!=0)&& m==2 && d==29){
+        cout<<"Incorrect year value.Insert a new one."<<endl;
+        int y;
+        cin>>y;
+        setYear(y);
+    }
+    else{
+        Year=year;
+    }
+}
+
 void Date::setMonth(int month){
     if(month<1||month>12){
         cout<<"Value out of bound.Insert value between 1 and 12."<<endl;

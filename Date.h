@@ -15,9 +15,7 @@ public:
         return Year;
     }
 
-    void setYear(int year) {
-        Year = year;
-    }
+    void setYear(int year);
 
     int getMonth() const {
         return Month;
