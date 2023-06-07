@@ -33,7 +33,7 @@ public:
 
     void show() const;
 
-    int CheckDate(const Date& Data);
+    int CheckDate(const Date & Data);
 
     void addDate();
 private:

@@ -100,7 +100,7 @@ void NoteList::addNote(){
         Giorno->addDate();
         Activity.setDate(Giorno);
         cout<<"Deadline added."<<endl;
-        if(int check=Giorno->CheckDate(*Giorno)==2){
+        if(Giorno->CheckDate(*Giorno)==2){
             SetConsoleTextAttribute(hConsole,4);
             cout<<"//WARNING:Deadline already expired//"<<endl;
             SetConsoleTextAttribute(hConsole,7);
@@ -165,7 +165,7 @@ void NoteList::printAll()const{
     }
 }
 
-void NoteList::printNote(const string& NoteName)const{
+void NoteList::printNote(const string & NoteName)const{
     for(auto index=NoteVector.begin();index!=NoteVector.end()+1;index++){
         if(index->getName()==NoteName){
             index->Print();
@@ -177,7 +177,7 @@ void NoteList::printNote(const string& NoteName)const{
     }
 }
 
-void NoteList::removeNote(const string &NoteName) {
+void NoteList::removeNote(const string & NoteName) {
     for(auto index=NoteVector.begin(); index != NoteVector.end() + 1; index++){
         if(index->getName() == NoteName){
             NoteVector.erase(index);
@@ -191,7 +191,7 @@ void NoteList::removeAll() {
     cout<<"The list is now empty."<<endl;
 }
 
-void NoteList::modify(const string& NoteName){
+void NoteList::modify(const string & NoteName){
     for(auto index=NoteVector.begin();index!=NoteVector.end()+1;index++){
         if(index->getName()==NoteName){
             cout<<"Insert new description:";
@@ -206,7 +206,7 @@ void NoteList::modify(const string& NoteName){
     }
 }
 
-void NoteList::deadLine(const string& NoteName) {
+void NoteList::deadLine(const string & NoteName) {
     HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
     vector<Note>::iterator index;
     for(index=NoteVector.begin();index!=NoteVector.end();index++){
@@ -215,7 +215,7 @@ void NoteList::deadLine(const string& NoteName) {
             Giorno->addDate();
             index->setDate(Giorno);
             cout<<"Deadline added."<<endl;
-            if(int check=Giorno->CheckDate(*Giorno)==2){
+            if(Giorno->CheckDate(*Giorno)==2){
                 SetConsoleTextAttribute(hConsole,4);
                 cout<<"//WARNING:Deadline already expired//"<<endl;
                 SetConsoleTextAttribute(hConsole,7);
@@ -227,7 +227,7 @@ void NoteList::deadLine(const string& NoteName) {
         cout<<"Note not found."<<endl;
 }
 
-void NoteList::noDeadLine(const string &NoteName) {
+void NoteList::noDeadLine(const string & NoteName) {
     for(auto & index : NoteVector){
         if(index.getName()==NoteName){
             index.eraseDate();
@@ -236,7 +236,7 @@ void NoteList::noDeadLine(const string &NoteName) {
     }
 }
 
-bool NoteList::checkDuplicate(const string &NoteName) const{
+bool NoteList::checkDuplicate(const string & NoteName) const{
     for(auto & index : NoteVector){
         if(index.getName()==NoteName)
             return true;
@@ -250,7 +250,7 @@ void NoteList::sort(){
     });
 }
 
-vector <string> NoteList::split(const string& s, const string& delimiter){
+vector <string> NoteList::split(const string & s, const string & delimiter){
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
     vector<string> res;

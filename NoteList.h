@@ -25,27 +25,27 @@ public:
 
     void printAll ()const;
 
-    void printNote(const string& NoteName)const;
+    void printNote(const string & NoteName)const;
 
-    void removeNote(const string& NoteName);
+    void removeNote(const string & NoteName);
 
     void removeAll();
 
-    void modify(const string& NoteName);
+    void modify(const string & NoteName);
 
-    void deadLine(const string& NoteName);
+    void deadLine(const string & NoteName);
 
-    void noDeadLine(const string& NoteName);
+    void noDeadLine(const string & NoteName);
 
-    bool checkDuplicate(const string& NoteName)const;
+    bool checkDuplicate(const string & NoteName)const;
 
     void sort();
 
-    static vector<string> split(const string& s,const string& delimiter);
+    static vector<string> split(const string & s,const string & delimiter);
 
     string readTerminal()const;
 
-    vector<Note> &getNoteVector() {
+    vector<Note> & getNoteVector() {
         return NoteVector;
     }
 private:

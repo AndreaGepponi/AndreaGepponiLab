@@ -14,19 +14,19 @@ class Note{
 public:
     Note(string N,string D,string P):Name(std::move(N)),Description(std::move(D)),Priority(std::move(P)){};
 
-    const string &getName() const {
+    const string & getName() const {
         return Name;
     }
 
-    const string &getDescription() const {
+    const string & getDescription() const {
         return Description;
     }
 
-    void setDescription(const string &description){
+    void setDescription(const string & description){
         Description = description;
     }
 
-    const string &getPriority() const {
+    const string & getPriority() const {
         return Priority;
     }
 
@@ -40,8 +40,8 @@ public:
         return Date;
     }
 
-    void eraseDate(){
-        Date=nullptr;
+    void eraseDate() {
+        Date=nullptr;   
     }
 private:
 string Name,Description,Priority;

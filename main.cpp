@@ -16,7 +16,7 @@ vector<string> splitTerminal(){
     return Trasfer;
 }
 
-string compact(const vector<string> &InputCommand){
+string compact(const vector<string> & InputCommand){
     string output;
     for(int index=1;index<InputCommand.size();index++){
         output+=InputCommand[index];

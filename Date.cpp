@@ -10,7 +10,7 @@ void Date::show() const {
     cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
 }
 
-int Date::CheckDate(const Date& Data) {
+int Date::CheckDate(const Date & Data) {
     time_t my_time=time(nullptr);
     struct tm* local=localtime(&my_time);
 
