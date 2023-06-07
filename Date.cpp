@@ -7,8 +7,12 @@
 using namespace std;
 
 void Date::show() const {
-    cout<<getDay()<<"/"<<getMonth()<<"/"<<getYear()<<endl;
-} //cambiare
+    stringstream output;
+    output<<getDay()<<"/"<<getMonth()<<"/"<<getYear();
+    string out;
+    output>>out;
+    cout<<out<<endl;
+}
 
 int Date::CheckDate() {
     time_t my_time=time(nullptr);

@@ -33,7 +33,7 @@ public:
 
     int modify(const string & NoteName, const string & NoteDescription);
 
-    bool deadLine(const string & NoteName, Date*Giorno);
+    bool deadLine(const string & NoteName, Date &Giorno);
 
     int noDeadLine(const string & NoteName);
 

@@ -202,12 +202,12 @@ int NoteList::modify(const string & NoteName, const string & NoteDescription){
         return 1;
 }
 
-bool NoteList::deadLine(const string & NoteName, Date*Giorno) {
+bool NoteList::deadLine(const string & NoteName, Date &Giorno) {
     if (findNote(NoteName)) {
     vector<Note>::iterator index;
     for (index = NoteVector.begin(); index != NoteVector.end(); index++) {
         if (NoteName == index->getName()) {
-            index->setDate(Giorno);
+            index->setDate(&Giorno);
             return true;
         }
     }

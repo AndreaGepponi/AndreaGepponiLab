@@ -104,7 +104,8 @@ void Interaction(NoteList ToDoList){
             Giorno->setMonth(month);
             Giorno->setYear(year);
            }
-        ToDoList.deadLine(InputString,Giorno);
+        ToDoList.deadLine(InputString,*Giorno);
+        cout<<"Deadline added."<<endl;
         separate();
         ToDoList.printAll();
         separate();
@@ -119,6 +120,7 @@ void Interaction(NoteList ToDoList){
             return;
         }
         ToDoList.noDeadLine(InputString);
+        cout<<"DeadLine removed."<<endl;
         separate();
         Interaction(ToDoList);
     }
@@ -160,8 +162,9 @@ void Interaction(NoteList ToDoList){
                 Giorno->setMonth(month);
                 Giorno->setYear(year);
             }
-            ToDoList.deadLine(NoteName,Giorno);
+            ToDoList.deadLine(NoteName,*Giorno);
         }
+        cout<<"Note added."<<endl;
         separate();
         ToDoList.printAll();
         separate();
@@ -177,6 +180,7 @@ void Interaction(NoteList ToDoList){
             return;
         }
         ToDoList.removeNote(InputString);
+        cout<<"Note removed."<<endl;
         separate();
         ToDoList.printAll();
         separate();
@@ -205,6 +209,8 @@ void Interaction(NoteList ToDoList){
     else if(TerminalInput[0]=="cancel"){
         ToDoList.removeAll();
         separate();
+        ToDoList.printAll();
+        separate();
         Interaction(ToDoList);
     }
 
@@ -219,6 +225,7 @@ void Interaction(NoteList ToDoList){
         cout<<"Insert new description:";
         string newDes=readTerminal();
         ToDoList.modify(InputString,newDes);
+        cout<<"The note has been modified."<<endl;
         separate();
         Interaction(ToDoList);
     }
