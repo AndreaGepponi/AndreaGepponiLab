@@ -90,7 +90,7 @@ void Interaction(NoteList ToDoList){
         Giorno->setDay(day);
         Giorno->setMonth(month);
         Giorno->setYear(year);
-        while (Giorno->CheckDate() == 2 || !Giorno->legalDate(year,month,day)) {
+        while (Giorno->CheckDate() == 2 || !Giorno->legalDate()) {
             SetConsoleTextAttribute(hConsole, 4);
             cout << "//WARNING:Deadline not valid.Insert a legal date.//" << endl;
             SetConsoleTextAttribute(hConsole, 7);
@@ -151,7 +151,7 @@ void Interaction(NoteList ToDoList){
             Giorno->setDay(day);
             Giorno->setMonth(month);
             Giorno->setYear(year);
-            while(Giorno->CheckDate()==2 ||!Giorno->legalDate(year,month,day)){
+            while(Giorno->CheckDate()==2 ||!Giorno->legalDate()){
                 SetConsoleTextAttribute(hConsole,4);
                 cout<<"//WARNING:Deadline already expired.Insert a legal date.//"<<endl;
                 SetConsoleTextAttribute(hConsole,7);

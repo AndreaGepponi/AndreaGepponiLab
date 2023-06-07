@@ -35,7 +35,7 @@ public:
 
     bool addDate(int year, int month, int day);
 
-    bool legalDate(int year,int month,int day);
+    bool legalDate();
 private:
     int Year=0,Month=1,Day=1;
 };

@@ -54,7 +54,11 @@ int Date::CheckDate() {
 }
 
 bool Date::addDate(int year, int month, int day){
-    if(legalDate(year,month,day)){
+    Date Giorno;
+    Giorno.Year=year;
+    Giorno.Month=month;
+    Giorno.Day=day;
+    if(Giorno.legalDate()){
         setYear(year);
         setMonth(month);
         setDay(day);
@@ -65,10 +69,12 @@ bool Date::addDate(int year, int month, int day){
 }
 
 int Date::setYear(int year){
+    Date Giorno;
+    Giorno.Month=1;
+    Giorno.Day=1;
+    Giorno.Year=year;
 
-    int m=getMonth();
-    int d=getDay();
-    if(legalDate(year,m,d)){
+    if(Giorno.legalDate()){
         Year=year;
         return 0;
     }
@@ -77,10 +83,12 @@ int Date::setYear(int year){
 }
 
 int Date::setMonth(int month){
+    Date Giorno;
+    Giorno.Year=0;
+    Giorno.Day=1;
+    Giorno.Month=month;
 
-    int y=getYear();
-    int d=getDay();
-    if(legalDate(y,month,d)){
+    if(Giorno.legalDate()){
         Month=month;
         return 0;
     }
@@ -89,18 +97,21 @@ int Date::setMonth(int month){
 }
 
 int Date::setDay(int day){
+    Date Giorno;
+    Giorno.Year=0;
+    Giorno.Month=1;
+    Giorno.Day=day;
 
-        int y=getYear();
-        int m=getMonth();
-        if(legalDate(y,m,day)){
-            Day=day;
-            return 0;
-        }
-        else
-            return 1;
+    if(Giorno.legalDate()){
+        Day=day;
+        return 0;
+    }
+    else
+        return 1;
 }
 
-bool Date::legalDate(int year,int month,int day) {
+bool Date::legalDate() {
+    int year=getYear(),month=getMonth(),day=getDay();
     bool bisestile=false;
     if((year%4==0 && year%100!=0) || year%400==0)
         bisestile=true;
