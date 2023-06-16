@@ -258,7 +258,7 @@ vector <string> NoteList::split(const string & s, const string & delimiter){
     return res;
 }
 
-bool NoteList::findNote(const std::string &NoteName) const{
+bool NoteList::findNote(const string &NoteName) const{
     for(auto index=NoteVector.begin();index!=NoteVector.end()+1;index++){
         if(index->getName()==NoteName){
             return true;

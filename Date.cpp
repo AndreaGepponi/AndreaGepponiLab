@@ -70,8 +70,8 @@ bool Date::addDate(int year, int month, int day){
 
 int Date::setYear(int year){
     Date Giorno;
-    Giorno.Month=1;
-    Giorno.Day=1;
+    Giorno.Month=getMonth();
+    Giorno.Day=getDay();
     Giorno.Year=year;
 
     if(Giorno.legalDate()){
@@ -84,8 +84,8 @@ int Date::setYear(int year){
 
 int Date::setMonth(int month){
     Date Giorno;
-    Giorno.Year=0;
-    Giorno.Day=1;
+    Giorno.Year=getYear();
+    Giorno.Day=getDay();
     Giorno.Month=month;
 
     if(Giorno.legalDate()){
@@ -98,8 +98,8 @@ int Date::setMonth(int month){
 
 int Date::setDay(int day){
     Date Giorno;
-    Giorno.Year=0;
-    Giorno.Month=1;
+    Giorno.Year=getYear();
+    Giorno.Month=getMonth();
     Giorno.Day=day;
 
     if(Giorno.legalDate()){
