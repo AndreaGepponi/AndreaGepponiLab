@@ -59,3 +59,16 @@ TEST(Date,TestYear){
     ASSERT_EQ(0,x);
     ASSERT_NE(0,y);
 }
+
+TEST(Date,TestDate){
+    Date Giorno;
+    int y=1994,m=9,d=11;
+    ASSERT_TRUE(Giorno.addDate(y,m,d));
+}
+
+TEST(Date,TestLegal){
+    Date Giorno;
+    int y=1994,m=9,d=11;
+    Giorno.addDate(y,m,d);
+    ASSERT_TRUE(Giorno.legalDate());
+}

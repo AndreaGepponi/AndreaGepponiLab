@@ -34,9 +34,7 @@ NoteList::NoteList(){
                     Year=stoi(Trasfer[5]);
 
                     Date* Giorno=new Date;
-                    Giorno->setDay(Day);
-                    Giorno->setMonth(Month);
-                    Giorno->setYear(Year);
+                    Giorno->addDate(Year,Month,Day);
                     Activity.setDate(Giorno);
 
                     NoteVector.emplace_back(Activity);
