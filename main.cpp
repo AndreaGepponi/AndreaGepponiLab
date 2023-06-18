@@ -56,8 +56,8 @@ void commands(){
     cout<<"Type print/[NoteName] to print note."<<endl;
     cout<<"Type modify/[NoteName] to modify a note's description."<<endl;
     cout<<"Type show to show all notes names and priority."<<endl;
-    cout<<"Type important to show all important notes."<<endl;
-    cout<<"Type expired to show all epired notes."<<endl;
+    cout<<"Type important to show the number of important notes."<<endl;
+    cout<<"Type expired to show the number of expired notes."<<endl;
     cout<<"Type cancel to remove all notes."<<endl;
     cout<<"Type quit to quit."<<endl;
     cout<<"Type help to show command list."<<endl;
@@ -87,9 +87,7 @@ void Interaction(NoteList ToDoList){
         cout << "Insert day:";
         cin >> day;
         Date *Giorno = new Date;
-        Giorno->setDay(day);
-        Giorno->setMonth(month);
-        Giorno->setYear(year);
+        Giorno->addDate(year,month,day);
         while (Giorno->CheckDate() == 2 || !Giorno->legalDate()) {
             SetConsoleTextAttribute(hConsole, 4);
             cout << "//WARNING:Deadline not valid.Insert a legal date.//" << endl;
@@ -100,9 +98,7 @@ void Interaction(NoteList ToDoList){
             cin >> month;
             cout << "insert day:";
             cin >> day;
-            Giorno->setDay(day);
-            Giorno->setMonth(month);
-            Giorno->setYear(year);
+            Giorno->addDate(year,month,day);
            }
         ToDoList.deadLine(InputString,*Giorno);
         cout<<"Deadline added."<<endl;
@@ -148,9 +144,7 @@ void Interaction(NoteList ToDoList){
             cout<<"Insert month:";cin>>month;
             cout<<"insert day:";cin>>day;
             Date* Giorno=new Date;
-            Giorno->setDay(day);
-            Giorno->setMonth(month);
-            Giorno->setYear(year);
+            Giorno->addDate(year,month,day);
             while(Giorno->CheckDate()==2 ||!Giorno->legalDate()){
                 SetConsoleTextAttribute(hConsole,4);
                 cout<<"//WARNING:Deadline already expired.Insert a legal date.//"<<endl;
@@ -158,9 +152,7 @@ void Interaction(NoteList ToDoList){
                 cout<<"Insert year:";cin>>year;
                 cout<<"Insert month:";cin>>month;
                 cout<<"insert day:";cin>>day;
-                Giorno->setDay(day);
-                Giorno->setMonth(month);
-                Giorno->setYear(year);
+                Giorno->addDate(year,month,day);
             }
             ToDoList.deadLine(NoteName,*Giorno);
         }
@@ -202,6 +194,9 @@ void Interaction(NoteList ToDoList){
 
     else if(TerminalInput[0]=="show"){
         ToDoList.printAll();
+        if(ToDoList.printAll()==0){
+            cout<<"The list is empty"<<endl;
+        }
         separate();
         Interaction(ToDoList);
     }
@@ -239,13 +234,15 @@ void Interaction(NoteList ToDoList){
     }
 
     else if(TerminalInput[0]=="important"){
-        ToDoList.printImportant();
+        int c=ToDoList.printImportant();
+        cout<<"The number of important notes in the list is:"<<c<<endl;
         separate();
         Interaction(ToDoList);
     }
 
     else if(TerminalInput[0]=="expired"){
-        ToDoList.printExpired();
+        int c=ToDoList.printExpired();
+        cout<<"The number of expired note in the list is:"<<c<<endl;
         separate();
         Interaction(ToDoList);
     }

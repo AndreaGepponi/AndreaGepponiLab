@@ -19,11 +19,11 @@ public:
 
     void addNote(const string & NameString, const string & DesString, const string & Important);
 
-    void printAll ()const;
+    int printAll ()const;
 
-    void printImportant()const;
+    int printImportant()const;
 
-    void printExpired()const;
+    int printExpired()const;
 
     int printNote(const string & NoteName)const;
 

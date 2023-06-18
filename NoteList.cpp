@@ -78,13 +78,13 @@ void NoteList::addNote(const string & NameString, const string & DesString, cons
     sort();
 }
 
-void NoteList::printAll()const{
+int NoteList::printAll()const{
     if(NoteVector.empty()){
-        cout<<"The list is empty."<<endl;
+        return 0;
     }
     else{
         cout<<"Note number:"<<NoteVector.size()<<endl;
-        int counter=1;
+        int counter=0;
         HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
         cout<<"[#]Name|Status|Priority"<<endl;cout<<endl;
         for(auto & index : NoteVector){
@@ -130,31 +130,28 @@ void NoteList::printAll()const{
             }
             counter++;
         }
+        return counter;
     }
 }
 
-void NoteList::printImportant() const {
+int NoteList::printImportant() const {
     int count=0;
     for(auto & index:NoteVector){
         if(index.getPriority()=="High") {
-            index.Print();
-            cout<<"==="<<endl;
             count++;
         }
     }
-    cout<<"There are "<<count<<" important note in the list."<<endl;
+    return count;
 }
 
-void NoteList::printExpired() const {
+int NoteList::printExpired() const {
     int count=0;
     for(auto & index:NoteVector){
-        if(index.getDate()->CheckDate()==2) {
-            index.Print();
-            cout<<"==="<<endl;
+        if(index.getDate()!= nullptr && index.getDate()->CheckDate()==2) {
             count++;
         }
     }
-    cout<<"There are "<<count<<" expired note in the list."<<endl;
+    return count;
 }
 
 int NoteList::printNote(const string & NoteName)const{

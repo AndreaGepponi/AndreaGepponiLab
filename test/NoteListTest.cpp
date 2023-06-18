@@ -114,3 +114,29 @@ TEST(NoteList,TestSlpit){
     ASSERT_EQ(Output[0],"Name");
     ASSERT_EQ(Output[1],"Description");
 }
+
+TEST(NoteList,TestImportant){
+    NoteList Try;
+    string N="Name",D="Description",P="yes";
+    Try.addNote(N,D,P);
+    ASSERT_EQ(1,Try.printImportant());
+}
+
+TEST(NoteList,TestExpired){
+    NoteList Try;
+    string N="Name",D="Description",P="yes";
+    Try.addNote(N,D,P);
+    int y=1900,m=10,d=20;
+    Date Giorno;
+    Giorno.addDate(y,m,d);
+    Try.deadLine(N,Giorno);
+    ASSERT_EQ(1,Try.printExpired());
+}
+
+TEST(NoteList,TestPrintAll){
+    NoteList Try;
+    ASSERT_EQ(0,Try.printAll());
+    string N="Name",D="Description",P="yes";
+    Try.addNote(N,D,P);
+    ASSERT_EQ(1,Try.printAll());
+}
