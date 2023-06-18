@@ -11,7 +11,6 @@ TEST(NoteList,TestEmpty){
     ASSERT_EQ(0,Try.getNoteVector().size());
 }
 
-
 TEST(NoteList,TestRemove){
     NoteList Try;
     string dummyName="sampleName",dummyDescription="sampleDescription",dummyPriority="Low";
@@ -68,10 +67,8 @@ TEST(NoteList,TestDuplicate){
     string N1="Dummy";
     string N="DummyName",D="DummyDescription",P="No";
     Try.addNote(N,D,P);
-    bool x=Try.checkDuplicate(N);
-    bool y=Try.checkDuplicate(N1);
-    ASSERT_EQ(true,x);
-    ASSERT_EQ(false,y);
+    ASSERT_TRUE(Try.checkDuplicate(N));
+    ASSERT_FALSE(Try.checkDuplicate(N1));
 }
 
 TEST(NoteList,TestFind){
@@ -79,8 +76,41 @@ TEST(NoteList,TestFind){
     string N1="Dummy";
     string N="DummyName",D="DummyDescription",P="No";
     Try.addNote(N,D,P);
-    bool x=Try.findNote(N);
-    bool y=Try.findNote(N1);
-    ASSERT_EQ(true,x);
-    ASSERT_EQ(false,y);
+    ASSERT_TRUE(Try.findNote(N));
+    ASSERT_FALSE(Try.findNote(N1));
+}
+
+TEST(NoteList,TestPrint){
+    NoteList Try;
+    string N="DummyName",D="DummyDescription",P="No";
+    Try.addNote(N,D,P);
+    ASSERT_EQ(0,Try.printNote(N));
+    ASSERT_EQ(1,Try.printNote(D));
+}
+
+TEST(NoteList,TestModify){
+    NoteList Try;
+    string N="DummyName",D="DummyDescription",P="No";
+    string NewDescription="Dummy";
+    Try.addNote(N,D,P);
+    ASSERT_EQ(0,Try.modify(N,NewDescription));
+}
+
+TEST(NoteList,TestSort){
+    NoteList Try;
+    string N="Name",D="Description",P="No";
+    string NewName="DummyName",NewDescription="NewDescription";
+    Try.addNote(N,D,P);
+    Try.addNote(NewName,NewDescription,P);
+    Try.sort();
+    ASSERT_EQ(Try.getNoteVector()[0].getName(),"DummyName");
+    ASSERT_EQ(Try.getNoteVector()[1].getName(),"Name");
+}
+
+TEST(NoteList,TestSlpit){
+    string Input="Name/Description";
+    string separator="/";
+    vector<string> Output=NoteList::split(Input,separator);
+    ASSERT_EQ(Output[0],"Name");
+    ASSERT_EQ(Output[1],"Description");
 }

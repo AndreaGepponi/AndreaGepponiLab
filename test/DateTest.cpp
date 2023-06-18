@@ -4,7 +4,7 @@
 #include"gtest/gtest.h"
 #include"../Date.h"
 
-TEST(Date,TestToday){
+TEST(Date,CheckDate){
     Date Today,Past,Future;
     time_t my_time=time(nullptr);
     struct tm* local=localtime(&my_time);
@@ -18,7 +18,7 @@ TEST(Date,TestToday){
     Past.setYear(local->tm_year + 1899);
 
     Future.setDay(local->tm_mday);
-    Future.setMonth(local->tm_mon);
+    Future.setMonth(local->tm_mon+1);
     Future.setYear(local->tm_year + 1901);
 
     int x=Today.CheckDate();
@@ -34,7 +34,7 @@ TEST(Date,TestDay){
     Date day;
     day.setYear(1997);
     day.setMonth(4);
-    int x=day.setDay(4);
+    int x=day.setDay(30);
     int y=day.setDay(31);
     ASSERT_EQ(0,x);
     ASSERT_NE(0,y);
