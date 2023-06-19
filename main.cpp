@@ -193,8 +193,8 @@ void Interaction(NoteList ToDoList){
     }
 
     else if(TerminalInput[0]=="show"){
-        ToDoList.printAll();
-        if(ToDoList.printAll()==0){
+        int x=ToDoList.printAll();
+        if(x==0){
             cout<<"The list is empty"<<endl;
         }
         separate();
