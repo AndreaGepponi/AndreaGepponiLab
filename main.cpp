@@ -248,7 +248,7 @@ void Interaction(NoteList ToDoList){
     }
 
     else if(TerminalInput[0]=="quit"){
-        ToDoList.save();
+        ToDoList.save("Testo.txt");
         return;
     }
 
@@ -269,7 +269,7 @@ int main() {
     HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole,2);
 
-    NoteList ToDoList;
+    NoteList ToDoList("Testo.txt");
 
     separate();
     commands();

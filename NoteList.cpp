@@ -5,8 +5,8 @@
 #include <windows.h>
 #include <algorithm>
 
-NoteList::NoteList(){
-        ifstream fText("Testo.txt",ifstream::in);
+NoteList::NoteList(const string& FileName){
+        ifstream fText(FileName,ifstream::in);
         vector<string> Trasfer;
         int Year,Month,Day;
         string aux,Name,Description,Priority,delimiter="/";
@@ -43,8 +43,8 @@ NoteList::NoteList(){
         }
     }
 
-void NoteList::save()const{
-    ofstream fText("Testo.txt");
+void NoteList::save(const string& FileName)const{
+    ofstream fText(FileName);
     for(auto & index : NoteVector){
         if(index.getDate() != nullptr){
             fText << index.getName() <<"/";

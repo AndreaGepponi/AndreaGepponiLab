@@ -13,9 +13,9 @@ using namespace std;
 
 class NoteList{
 public:
-    explicit NoteList();
+    explicit NoteList(const string& FileName);
 
-    void save()const;
+    void save(const string& FileName)const;
 
     void addNote(const string & NameString, const string & DesString, const string & Important);
 
