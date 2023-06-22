@@ -59,13 +59,11 @@ TEST(Date,TestYear){
 
 TEST(Date,TestDate){
     Date Giorno;
-    int y=1994,m=9,d=11;
-    ASSERT_TRUE(Giorno.addDate(y,m,d));
+    ASSERT_TRUE(Giorno.addDate(1994,9,11));
 }
 
 TEST(Date,TestLegal){
     Date Giorno;
-    int y=1994,m=9,d=11;
-    Giorno.addDate(y,m,d);
+    Giorno.addDate(1994,9,11);
     ASSERT_TRUE(Giorno.legalDate());
 }

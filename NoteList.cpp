@@ -260,3 +260,12 @@ bool NoteList::findNote(const string &NoteName) const{
         }
     }
 }
+
+Note NoteList::getNote(const string &NoteName)const {
+    if (findNote(NoteName)) {
+        for (auto index = NoteVector.begin(); index != NoteVector.end() + 1; index++) {
+            if (index->getName() == NoteName)
+               return *index;
+        }
+    }
+}

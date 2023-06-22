@@ -5,11 +5,11 @@
 TEST(NoteList,TestConstructor){
     int x=1,y=1;
     NoteList Test("Constructor.txt");
-    if(Test.getNoteVector()[0].getName() == "Activity" && Test.getNoteVector()[0].getDescription() == "Des" &&
-       Test.getNoteVector()[0].getPriority() == "Low")
+    if(Test.getNote("Activity").getName()=="Activity" && Test.getNote("Activity").getDescription() == "Des" &&
+       Test.getNote("Activity").getPriority() == "Low")
         x=0;
-    if(Test.getNoteVector()[1].getName() == "Prova" && Test.getNoteVector()[1].getDescription() == "Des" &&
-       Test.getNoteVector()[1].getPriority() == "High")
+    if(Test.getNote("Prova").getName() == "Prova" && Test.getNote("Prova").getDescription() == "Des" &&
+       Test.getNote("Prova").getPriority() == "High")
         y=0;
     ASSERT_EQ(x,0);
     ASSERT_EQ(y,0);
@@ -26,9 +26,9 @@ TEST(NoteList,TestSave){
     Test.save("Save.txt");
     NoteList Testcheck("Save.txt");
     ASSERT_EQ(Testcheck.getNoteVector().size(),1);
-    ASSERT_EQ(Testcheck.getNoteVector()[0].getName(),"DummyName");
-    ASSERT_EQ(Testcheck.getNoteVector()[0].getDescription(),"DummyDescription");
-    ASSERT_EQ(Testcheck.getNoteVector()[0].getPriority(),"Low");
+    ASSERT_EQ(Testcheck.getNote("DummyName").getName(),"DummyName");
+    ASSERT_EQ(Testcheck.getNote("DummyName").getDescription(),"DummyDescription");
+    ASSERT_EQ(Testcheck.getNote("DummyName").getPriority(),"Low");
 }
 
 TEST(NoteList,TestEmpty){
@@ -68,7 +68,7 @@ TEST(NoteList,TestExpire){
     Test.addNote(N, D, P);
     Test.deadLine(N, expireDay);
 
-    ASSERT_NE(nullptr, Test.getNoteVector()[0].getDate());
+    ASSERT_NE(nullptr, Test.getNote("DummyName").getDate());
     Test.removeAll();
 }
 
@@ -83,7 +83,7 @@ TEST(NoteList,TestNoExpire){
     Test.addNote(N, D, P);
     Test.deadLine(N, expireDay);
     Test.noDeadLine(N);
-    ASSERT_EQ(nullptr, Test.getNoteVector()[0].getDate());
+    ASSERT_EQ(nullptr, Test.getNote("DummyName").getDate());
     Test.removeAll();
 }
 
@@ -132,8 +132,8 @@ TEST(NoteList,TestSort){
     Test.addNote(N, D, P);
     Test.addNote(NewName, NewDescription, P);
     Test.sort();
-    ASSERT_EQ(Test.getNoteVector()[0].getName(), "DummyName");
-    ASSERT_EQ(Test.getNoteVector()[1].getName(), "Name");
+    ASSERT_EQ(Test.getNote("DummyName").getName(), "DummyName");
+    ASSERT_EQ(Test.getNote("Name").getName(), "Name");
     Test.removeAll();
 }
 
@@ -170,5 +170,15 @@ TEST(NoteList,TestPrintAll){
     string N="Name",D="Description",P="yes";
     Test.addNote(N, D, P);
     ASSERT_EQ(1, Test.printAll());
+    Test.removeAll();
+}
+
+TEST(NoteList,TestGetNote){
+    NoteList Test("Test.txt");
+    string N="Name",D="Description",P="yes";
+    Test.addNote(N, D, P);
+    ASSERT_EQ(Test.getNote("Name").getName(),"Name");
+    ASSERT_EQ(Test.getNote("Name").getDescription(),"Description");
+    ASSERT_EQ(Test.getNote("Name").getPriority(),"High");
     Test.removeAll();
 }

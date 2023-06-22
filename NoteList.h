@@ -41,6 +41,8 @@ public:
 
     bool findNote(const string & NoteName)const;
 
+    Note getNote(const string &NoteName)const;
+
     vector<Note> & getNoteVector() {
         return NoteVector;
     }
