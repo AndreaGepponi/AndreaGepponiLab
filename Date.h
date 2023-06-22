@@ -1,7 +1,3 @@
-//
-// Created by geppo on 19/05/2023.
-//
-
 #ifndef ANDREAGEPPONILAB_DATE_H
 #define ANDREAGEPPONILAB_DATE_H
 #include <string>

@@ -1,139 +1,140 @@
-//
-// Created by geppo on 24/05/2023.
-//
 #include "gtest/gtest.h"
 
 #include "../NoteList.h"
 
 TEST(NoteList,TestConstructor){
-    NoteList Try("Constructor.txt");
-    ASSERT_EQ(Try.getNoteVector().size(),2);
-    ASSERT_NE(Try.getNoteVector()[0].getDate(),nullptr);
-    ASSERT_EQ(Try.getNoteVector()[1].getDate(),nullptr);
+    int x=1,y=1;
+    NoteList Test("Constructor.txt");
+    if(Test.getNoteVector()[0].getName() == "Activity" && Test.getNoteVector()[0].getDescription() == "Des" &&
+       Test.getNoteVector()[0].getPriority() == "Low")
+        x=0;
+    if(Test.getNoteVector()[1].getName() == "Prova" && Test.getNoteVector()[1].getDescription() == "Des" &&
+       Test.getNoteVector()[1].getPriority() == "High")
+        y=0;
+    ASSERT_EQ(x,0);
+    ASSERT_EQ(y,0);
+    ASSERT_EQ(Test.getNoteVector().size(), 2);
+    ASSERT_NE(Test.getNoteVector()[0].getDate(), nullptr);
+    ASSERT_EQ(Test.getNoteVector()[1].getDate(), nullptr);
 }
 
 TEST(NoteList,TestSave){
-    NoteList Try("Save.txt");
-    Try.removeAll();
+    NoteList Test("Save.txt");
+    Test.removeAll();
     string N="DummyName",D="DummyDescription",P="No";
-    Try.addNote(N,D,P);
-    Try.save("Save.txt");
-    NoteList Trycheck("Save.txt");
-    ASSERT_EQ(Trycheck.getNoteVector().size(),1);
-    ASSERT_EQ(Trycheck.getNoteVector()[0].getName(),"DummyName");
-    ASSERT_EQ(Trycheck.getNoteVector()[0].getDescription(),"DummyDescription");
-    ASSERT_EQ(Trycheck.getNoteVector()[0].getPriority(),"Low");
+    Test.addNote(N, D, P);
+    Test.save("Save.txt");
+    NoteList Testcheck("Save.txt");
+    ASSERT_EQ(Testcheck.getNoteVector().size(),1);
+    ASSERT_EQ(Testcheck.getNoteVector()[0].getName(),"DummyName");
+    ASSERT_EQ(Testcheck.getNoteVector()[0].getDescription(),"DummyDescription");
+    ASSERT_EQ(Testcheck.getNoteVector()[0].getPriority(),"Low");
 }
 
 TEST(NoteList,TestEmpty){
-    NoteList Try("Test.txt");
-    Try.removeAll();
-    ASSERT_EQ(0,Try.getNoteVector().size());
+    NoteList Test("Test.txt");
+    Test.removeAll();
+    ASSERT_EQ(0, Test.getNoteVector().size());
 }
 
 TEST(NoteList,TestRemove){
-    NoteList Try("Test.txt");
-    string dummyName="sampleName",dummyDescription="sampleDescription",dummyPriority="Low";
-    Note Activity(dummyName,dummyDescription,dummyPriority);
-    Try.getNoteVector().emplace_back(Activity);
-    int size=Try.getNoteVector().size();
-    Try.removeNote(dummyName);
-    ASSERT_EQ(size-1,Try.getNoteVector().size());
-    Try.removeAll();
+    NoteList Test("Test.txt");
+    string dummyName="sampleName",dummyDescription="sampleDescription",dummyPriority="No";
+
+    Test.addNote(dummyName,dummyDescription,dummyPriority);
+    int size=Test.getNoteVector().size();
+    Test.removeNote(dummyName);
+    ASSERT_EQ(size-1, Test.getNoteVector().size());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestAddNote){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="DummyName",D="DummyDescription",P="No";
-    int size1=Try.getNoteVector().size();
-    Try.addNote(N,D,P);
-    int size2=Try.getNoteVector().size();
-    ASSERT_EQ(size1+1,size2);
-    Try.removeAll();
+    int size=Test.getNoteVector().size();
+    Test.addNote(N, D, P);
+    ASSERT_EQ(size+1,Test.getNoteVector().size());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestExpire){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
 
     string N="DummyName",D="DummyDescription",P="No";
 
     Date expireDay;
-    expireDay.setYear(2000);
-    expireDay.setMonth(11);
-    expireDay.setDay(20);
+    expireDay.addDate(2000,11,20);
 
-    Try.addNote(N,D,P);
-    Try.deadLine(N,expireDay);
+    Test.addNote(N, D, P);
+    Test.deadLine(N, expireDay);
 
-    ASSERT_NE(nullptr,Try.getNoteVector()[0].getDate());
-    Try.removeAll();
+    ASSERT_NE(nullptr, Test.getNoteVector()[0].getDate());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestNoExpire){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
 
     string N="DummyName",D="DummyDescription",P="No";
 
     Date expireDay;
-    expireDay.setYear(2000);
-    expireDay.setMonth(11);
-    expireDay.setDay(20);
+    expireDay.addDate(2000,11,20);
 
-    Try.addNote(N,D,P);
-    Try.deadLine(N,expireDay);
-    Try.noDeadLine(N);
-    ASSERT_EQ(nullptr,Try.getNoteVector()[0].getDate());
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    Test.deadLine(N, expireDay);
+    Test.noDeadLine(N);
+    ASSERT_EQ(nullptr, Test.getNoteVector()[0].getDate());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestDuplicate){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N1="Dummy";
     string N="DummyName",D="DummyDescription",P="No";
-    Try.addNote(N,D,P);
-    ASSERT_TRUE(Try.checkDuplicate(N));
-    ASSERT_FALSE(Try.checkDuplicate(N1));
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_TRUE(Test.checkDuplicate(N));
+    ASSERT_FALSE(Test.checkDuplicate(N1));
+    Test.removeAll();
 }
 
 TEST(NoteList,TestFind){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N1="Dummy";
     string N="DummyName",D="DummyDescription",P="No";
-    Try.addNote(N,D,P);
-    ASSERT_TRUE(Try.findNote(N));
-    ASSERT_FALSE(Try.findNote(N1));
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_TRUE(Test.findNote(N));
+    ASSERT_FALSE(Test.findNote(N1));
+    Test.removeAll();
 }
 
 TEST(NoteList,TestPrint){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="DummyName",D="DummyDescription",P="No";
-    Try.addNote(N,D,P);
-    ASSERT_EQ(0,Try.printNote(N));
-    ASSERT_EQ(1,Try.printNote(D));
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_EQ(0, Test.printNote(N));
+    ASSERT_EQ(1, Test.printNote(D));
+    Test.removeAll();
 }
 
 TEST(NoteList,TestModify){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="DummyName",D="DummyDescription",P="No";
     string NewDescription="Dummy";
-    Try.addNote(N,D,P);
-    ASSERT_EQ(0,Try.modify(N,NewDescription));
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_EQ(0, Test.modify(N, NewDescription));
+    Test.removeAll();
 }
 
 TEST(NoteList,TestSort){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="Name",D="Description",P="No";
     string NewName="DummyName",NewDescription="NewDescription";
-    Try.addNote(N,D,P);
-    Try.addNote(NewName,NewDescription,P);
-    Try.sort();
-    ASSERT_EQ(Try.getNoteVector()[0].getName(),"DummyName");
-    ASSERT_EQ(Try.getNoteVector()[1].getName(),"Name");
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    Test.addNote(NewName, NewDescription, P);
+    Test.sort();
+    ASSERT_EQ(Test.getNoteVector()[0].getName(), "DummyName");
+    ASSERT_EQ(Test.getNoteVector()[1].getName(), "Name");
+    Test.removeAll();
 }
 
 TEST(NoteList,TestSlpit){
@@ -145,30 +146,29 @@ TEST(NoteList,TestSlpit){
 }
 
 TEST(NoteList,TestImportant){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="Name",D="Description",P="yes";
-    Try.addNote(N,D,P);
-    ASSERT_EQ(1,Try.printImportant());
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_EQ(1, Test.printImportant());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestExpired){
-    NoteList Try("Test.txt");
+    NoteList Test("Test.txt");
     string N="Name",D="Description",P="yes";
-    Try.addNote(N,D,P);
-    int y=1900,m=10,d=20;
+    Test.addNote(N, D, P);
     Date Giorno;
-    Giorno.addDate(y,m,d);
-    Try.deadLine(N,Giorno);
-    ASSERT_EQ(1,Try.printExpired());
-    Try.removeAll();
+    Giorno.addDate(1900,10,20);
+    Test.deadLine(N, Giorno);
+    ASSERT_EQ(1, Test.printExpired());
+    Test.removeAll();
 }
 
 TEST(NoteList,TestPrintAll){
-    NoteList Try("Test.txt");
-    ASSERT_EQ(0,Try.printAll());
+    NoteList Test("Test.txt");
+    ASSERT_EQ(0, Test.printAll());
     string N="Name",D="Description",P="yes";
-    Try.addNote(N,D,P);
-    ASSERT_EQ(1,Try.printAll());
-    Try.removeAll();
+    Test.addNote(N, D, P);
+    ASSERT_EQ(1, Test.printAll());
+    Test.removeAll();
 }

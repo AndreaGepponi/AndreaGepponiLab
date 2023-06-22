@@ -1,7 +1,3 @@
-//
-// Created by geppo on 19/05/2023.
-//
-
 #ifndef ANDREAGEPPONILAB_NOTE_H
 #define ANDREAGEPPONILAB_NOTE_H
 #include <string>

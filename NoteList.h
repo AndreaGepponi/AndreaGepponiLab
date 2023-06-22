@@ -1,7 +1,3 @@
-//
-// Created by geppo on 22/05/2023.
-//
-
 #ifndef ANDREAGEPPONILAB_NOTELIST_H
 #define ANDREAGEPPONILAB_NOTELIST_H
 #include"Note.h"

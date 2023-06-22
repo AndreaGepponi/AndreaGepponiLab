@@ -1,6 +1,3 @@
-//
-// Created by geppo on 22/05/2023.
-//
 #include "NoteList.h"
 #include <windows.h>
 #include <algorithm>

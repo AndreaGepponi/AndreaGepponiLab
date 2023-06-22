@@ -1,7 +1,3 @@
-//
-// Created by geppo on 19/05/2023.
-//
-
 #include "Note.h"
 
 void Note::Print() const{

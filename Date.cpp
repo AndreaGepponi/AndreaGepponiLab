@@ -1,6 +1,3 @@
-//
-// Created by geppo on 19/05/2023.
-//
 #include "Date.h"
 #include <iostream>
 #include <sstream>
