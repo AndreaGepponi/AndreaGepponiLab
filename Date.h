@@ -27,11 +27,11 @@ public:
 
     void show() const;
 
-    int CheckDate();
+    int CheckDate() const;
 
     bool addDate(int year, int month, int day);
 
-    bool legalDate();
+    bool legalDate() const;
 private:
     int Year=0,Month=1,Day=1;
 };

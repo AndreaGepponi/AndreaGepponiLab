@@ -11,7 +11,7 @@ void Date::show() const {
     cout<<out<<endl;
 }
 
-int Date::CheckDate() {
+int Date::CheckDate() const {
     time_t my_time=time(nullptr);
     struct tm* local=localtime(&my_time);
 
@@ -107,7 +107,7 @@ int Date::setDay(int day){
         return 1;
 }
 
-bool Date::legalDate() {
+bool Date::legalDate() const {
     int year=getYear(),month=getMonth(),day=getDay();
     bool bisestile=false;
     if((year%4==0 && year%100!=0) || year%400==0)
