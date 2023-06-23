@@ -31,39 +31,27 @@ TEST(Date,TestDay){
     Date day;
     day.setYear(1997);
     day.setMonth(4);
-    int x=day.setDay(30);
-    int y=day.setDay(31);
-    ASSERT_EQ(0,x);
-    ASSERT_NE(0,y);
+    ASSERT_TRUE(day.setDay(30));
+    ASSERT_FALSE(day.setDay(31));
 }
 
 TEST(Date,TestMonth){
     Date month;
     month.setYear(2003);
     month.setDay(29);
-    int x=month.setMonth(3);
-    int y=month.setMonth(2);
-    ASSERT_EQ(0,x);
-    ASSERT_NE(0,y);
+    ASSERT_TRUE(month.setMonth(3));
+    ASSERT_FALSE(month.setMonth(2));
 }
 
 TEST(Date,TestYear){
     Date year;
     year.setDay(29);
     year.setMonth(2);
-    int x=year.setYear(2000);
-    int y=year.setYear(2001);
-    ASSERT_EQ(0,x);
-    ASSERT_NE(0,y);
+    ASSERT_TRUE(year.setYear(2000));
+    ASSERT_FALSE(year.setYear(2001));
 }
 
 TEST(Date,TestDate){
     Date Giorno;
     ASSERT_TRUE(Giorno.addDate(1994,9,11));
-}
-
-TEST(Date,TestLegal){
-    Date Giorno;
-    Giorno.addDate(1994,9,11);
-    ASSERT_TRUE(Giorno.legalDate());
 }

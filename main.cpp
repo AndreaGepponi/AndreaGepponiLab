@@ -87,8 +87,8 @@ void Interaction(NoteList ToDoList){
         cout << "Insert day:";
         cin >> day;
         Date *Giorno = new Date;
-        Giorno->addDate(year,month,day);
-        while (Giorno->CheckDate() == 2 || !Giorno->legalDate()) {
+        bool check=Giorno->addDate(year,month,day);
+        while (Giorno->CheckDate() == 2 || !check) {
             SetConsoleTextAttribute(hConsole, 4);
             cout << "//WARNING:Deadline not valid.Insert a legal date.//" << endl;
             SetConsoleTextAttribute(hConsole, 7);
@@ -98,7 +98,7 @@ void Interaction(NoteList ToDoList){
             cin >> month;
             cout << "insert day:";
             cin >> day;
-            Giorno->addDate(year,month,day);
+            check=Giorno->addDate(year,month,day);
            }
         ToDoList.deadLine(InputString,*Giorno);
         cout<<"Deadline added."<<endl;
@@ -144,15 +144,15 @@ void Interaction(NoteList ToDoList){
             cout<<"Insert month:";cin>>month;
             cout<<"insert day:";cin>>day;
             Date* Giorno=new Date;
-            Giorno->addDate(year,month,day);
-            while(Giorno->CheckDate()==2 ||!Giorno->legalDate()){
+            bool check=Giorno->addDate(year,month,day);
+            while(Giorno->CheckDate()==2 || !check){
                 SetConsoleTextAttribute(hConsole,4);
                 cout<<"//WARNING:Deadline already expired.Insert a legal date.//"<<endl;
                 SetConsoleTextAttribute(hConsole,7);
                 cout<<"Insert year:";cin>>year;
                 cout<<"Insert month:";cin>>month;
                 cout<<"insert day:";cin>>day;
-                Giorno->addDate(year,month,day);
+                check=Giorno->addDate(year,month,day);
             }
             ToDoList.deadLine(NoteName,*Giorno);
         }

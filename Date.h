@@ -11,19 +11,19 @@ public:
         return Year;
     }
 
-    int setYear(int year);
+    bool setYear(int year);
 
     int getMonth() const {
         return Month;
     }
 
-    int setMonth(int month);
+    bool setMonth(int month);
 
     int getDay() const {
         return Day;
     }
 
-    int setDay(int day);
+    bool setDay(int day);
 
     void show() const;
 
@@ -31,8 +31,8 @@ public:
 
     bool addDate(int year, int month, int day);
 
-    bool legalDate() const;
 private:
+    bool legalDate() const;
     int Year=0,Month=1,Day=1;
 };
 #endif //ANDREAGEPPONILAB_DATE_H

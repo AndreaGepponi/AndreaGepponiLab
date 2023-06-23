@@ -65,7 +65,7 @@ bool Date::addDate(int year, int month, int day){
         return false;
 }
 
-int Date::setYear(int year){
+bool Date::setYear(int year){
     Date Giorno;
     Giorno.Month=getMonth();
     Giorno.Day=getDay();
@@ -73,13 +73,13 @@ int Date::setYear(int year){
 
     if(Giorno.legalDate()){
         Year=year;
-        return 0;
+        return true;
     }
     else
-        return 1;
+        return false;
 }
 
-int Date::setMonth(int month){
+bool Date::setMonth(int month){
     Date Giorno;
     Giorno.Year=getYear();
     Giorno.Day=getDay();
@@ -87,13 +87,13 @@ int Date::setMonth(int month){
 
     if(Giorno.legalDate()){
         Month=month;
-        return 0;
+        return true;
     }
     else
-        return 1;
+        return false;
 }
 
-int Date::setDay(int day){
+bool Date::setDay(int day){
     Date Giorno;
     Giorno.Year=getYear();
     Giorno.Month=getMonth();
@@ -101,10 +101,10 @@ int Date::setDay(int day){
 
     if(Giorno.legalDate()){
         Day=day;
-        return 0;
+        return true;
     }
     else
-        return 1;
+        return false;
 }
 
 bool Date::legalDate() const {

@@ -151,47 +151,47 @@ int NoteList::printExpired() const {
     return count;
 }
 
-int NoteList::printNote(const string & NoteName)const{
+bool NoteList::printNote(const string & NoteName)const{
     if(findNote(NoteName)) {
         for (auto index = NoteVector.begin(); index != NoteVector.end() + 1; index++) {
             if (index->getName() == NoteName) {
                 index->Print();
-                return 0;
+                return true;
             }
         }
     }
     else
-        return 1;
+        return false;
 }
 
-int NoteList::removeNote(const string & NoteName) {
+bool NoteList::removeNote(const string & NoteName) {
     if(findNote(NoteName)) {
         for (auto index = NoteVector.begin(); index != NoteVector.end() + 1; index++) {
             if (index->getName() == NoteName) {
                 NoteVector.erase(index);
             }
         }
-        return 0;
+        return true;
     }
     else
-        return 1;
+        return false;
 }
 
 void NoteList::removeAll() {
     NoteVector.clear();
 }
 
-int NoteList::modify(const string & NoteName, const string & NoteDescription){
+bool NoteList::modify(const string & NoteName, const string & NoteDescription){
     if(findNote(NoteName)) {
         for (auto index = NoteVector.begin(); index != NoteVector.end() + 1; index++) {
             if (index->getName() == NoteName) {
                 index->setDescription(NoteDescription);
-                return 0;
+                return true;
             }
         }
     }
     else
-        return 1;
+        return false;
 }
 
 bool NoteList::deadLine(const string & NoteName, Date &Giorno) {
@@ -208,17 +208,17 @@ bool NoteList::deadLine(const string & NoteName, Date &Giorno) {
      return false;
 }
 
-int NoteList::noDeadLine(const string & NoteName) {
+bool NoteList::noDeadLine(const string & NoteName) {
     if(findNote(NoteName)) {
         for (auto &index: NoteVector) {
             if (index.getName() == NoteName) {
                 index.eraseDate();
-                return 0;
+                return true;
             }
         }
     }
     else
-        return 1;
+        return false;
 }
 
 bool NoteList::checkDuplicate(const string & NoteName) const{

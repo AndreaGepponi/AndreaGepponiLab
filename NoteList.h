@@ -21,17 +21,17 @@ public:
 
     int printExpired()const;
 
-    int printNote(const string & NoteName)const;
+    bool printNote(const string & NoteName)const;
 
-    int removeNote(const string & NoteName);
+    bool removeNote(const string & NoteName);
 
     void removeAll();
 
-    int modify(const string & NoteName, const string & NoteDescription);
+    bool modify(const string & NoteName, const string & NoteDescription);
 
     bool deadLine(const string & NoteName, Date &Giorno);
 
-    int noDeadLine(const string & NoteName);
+    bool noDeadLine(const string & NoteName);
 
     bool checkDuplicate(const string & NoteName)const;
 

@@ -43,7 +43,7 @@ TEST(NoteList,TestRemove){
 
     Test.addNote(dummyName,dummyDescription,dummyPriority);
     int size=Test.getNoteVector().size();
-    Test.removeNote(dummyName);
+    ASSERT_TRUE(Test.removeNote(dummyName));
     ASSERT_EQ(size-1, Test.getNoteVector().size());
     Test.removeAll();
 }
@@ -82,7 +82,7 @@ TEST(NoteList,TestNoExpire){
 
     Test.addNote(N, D, P);
     Test.deadLine(N, expireDay);
-    Test.noDeadLine(N);
+    ASSERT_TRUE(Test.noDeadLine(N));
     ASSERT_EQ(nullptr, Test.getNote("DummyName").getDate());
     Test.removeAll();
 }
@@ -111,8 +111,8 @@ TEST(NoteList,TestPrint){
     NoteList Test("Test.txt");
     string N="DummyName",D="DummyDescription",P="No";
     Test.addNote(N, D, P);
-    ASSERT_EQ(0, Test.printNote(N));
-    ASSERT_EQ(1, Test.printNote(D));
+    ASSERT_TRUE(Test.printNote(N));
+    ASSERT_FALSE(Test.printNote(D));
     Test.removeAll();
 }
 
@@ -121,7 +121,7 @@ TEST(NoteList,TestModify){
     string N="DummyName",D="DummyDescription",P="No";
     string NewDescription="Dummy";
     Test.addNote(N, D, P);
-    ASSERT_EQ(0, Test.modify(N, NewDescription));
+    ASSERT_TRUE(Test.modify(N, NewDescription));
     Test.removeAll();
 }
 
